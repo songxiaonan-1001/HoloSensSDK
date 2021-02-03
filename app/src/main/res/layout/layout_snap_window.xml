@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/multi_capture_height"
+    android:background="@color/bg_stream"
+    android:id="@+id/layout_snap"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/multi_capture_height"
+        android:layout_marginLeft="@dimen/mine_padding"
+        android:layout_marginStart="@dimen/mine_padding">
+
+        <ImageView
+            android:id="@+id/iv_snap"
+            android:layout_width="@dimen/multi_capture_height"
+            android:layout_height="@dimen/margin_32"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            android:scaleType="fitXY"
+            android:contentDescription="@string/app_name_holo" />
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/iv_type"
+            android:layout_width="@dimen/height_12"
+            android:layout_height="@dimen/height_12"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_watch_video"
+            android:contentDescription="@string/app_name_holo" />
+
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:singleLine="false"
+        android:text=""
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/mine_padding"
+        android:paddingRight="@dimen/mine_padding"
+        android:gravity="center"
+        android:text="@string/watch"
+        android:textFontWeight="500"
+        android:textColor="@color/main"
+        android:textSize="@dimen/text_size_16"/>
+
+</LinearLayout>

@@ -1,0 +1,120 @@
+apply from: "${rootProject.rootDir}/config.gradle"
+apply plugin: 'com.android.application'
+apply plugin: 'com.huawei.agconnect'
+apply plugin: 'android-aspectjx'
+
+android {
+    compileSdkVersion project.ext.compileSdkVersion
+    buildToolsVersion project.ext.buildToolsVersion
+    defaultConfig {
+        applicationId project.ext.applicationId
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
+        versionCode project.ext.versionCode
+        versionName project.ext.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters 'armeabi', 'arm64-v8a'
+        }
+        resConfigs "en", "zh-rCN"
+        // multidex support
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    def fileName = "Holosens-${defaultConfig.versionName}-${defaultConfig.versionCode}-${releaseTime()}.apk"
+                    outputFileName = fileName
+
+                }
+            }
+        }
+    }
+
+    //华为推送相关
+    /*signingConfigs {
+        release {
+            keyAlias 'holosens'
+            keyPassword '123456'
+            storeFile file('HolosensKey')
+            storePassword '123456'
+        }
+        debug {
+            storeFile file('HolosensKey')
+            storePassword '123456'
+            keyAlias 'holosens'
+            keyPassword '123456'
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.config
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            signingConfig signingConfigs.config
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }*/
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+def releaseTime() {
+    return new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("GMT+8"))
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation project(':NetModule')
+    implementation project(':BasicModule')
+//    implementation project(':easypermissions')
+    /*fastjson*/
+    implementation 'com.alibaba:fastjson:1.2.62'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+//    implementation 'com.youth.banner:banner:2.0.0-alpha'
+    //    树
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.0'
+    //    侧滑删除
+    implementation 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0'
+    //    xing
+    implementation 'com.google.zxing:core:3.4.0'
+    //仿魅族日历控件
+    implementation 'com.haibin:calendarview:3.6.7'
+    // multidex
+    implementation 'com.android.support:multidex:1.0.2'
+
+    //刷新控件
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5'
+    // BadgeView(https://github.com/qstumn/BadgeView)
+    implementation 'q.rorbin:badgeview:1.0.7'
+
+    implementation 'org.aspectj:aspectjrt:1.8.9'
+
+    //腾讯bugly ，崩溃上报
+    implementation 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release' //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
+
+    implementation 'com.belerweb:pinyin4j:2.5.0'
+
+    implementation 'com.lzy.net:okgo:3.0.4'
+
+    implementation 'pub.devrel:easypermissions:3.0.0'
+
+}
+
+apply plugin: 'com.huawei.agconnect'

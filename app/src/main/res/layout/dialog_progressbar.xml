@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/width_280"
+    android:layout_height="@dimen/height_142"
+    android:layout_centerInParent="true"
+    android:background="@drawable/bg_dialog_update"
+    android:minWidth="280dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_height="@dimen/margin_24"
+        android:layout_marginLeft="@dimen/margin_24"
+        android:layout_marginRight="@dimen/margin_24"
+        android:layout_marginTop="@dimen/margin_20"
+        android:text="@string/update_downloading"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textFontWeight="500"
+        android:visibility="visible"
+        tools:text="@string/update_downloading" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10">
+
+        <TextView
+            android:id="@+id/progress_num"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/margin_24"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_24"
+            android:textColor="@color/black"
+            android:textFontWeight="500"
+            android:textSize="18sp"
+            tools:ignore="HardcodedText,RtlHardcoded" />
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_14"
+            android:layout_marginLeft="@dimen/margin_24"
+            android:background="@drawable/shape_bg_progress_bar"
+            android:layout_marginRight="@dimen/margin_24"
+            android:layout_marginBottom="@dimen/margin_52"
+            android:layout_below="@+id/progress_num"
+            android:max="100"
+            android:progressDrawable="@drawable/bg_dialog_progress"
+            tools:ignore="RtlHardcoded" />
+
+    </RelativeLayout>
+</LinearLayout>

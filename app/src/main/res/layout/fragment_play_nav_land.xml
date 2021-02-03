@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?><!--顶部返回栏-->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent">
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/height_60"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/ic_play_land_back"/>
+
+    <!--返回一(3秒自动隐藏, 点击显示/隐藏)-->
+    <RelativeLayout
+        android:id="@+id/rlyt_back"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_60">
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+
+        <ImageView
+            android:id="@+id/btn_land_audio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_24"
+            android:layout_marginEnd="@dimen/margin_24"
+            android:src="@drawable/selector_play_land_audio" />
+
+        <ImageView
+            android:id="@+id/btn_land_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/btn_land_audio"
+            android:layout_toStartOf="@+id/btn_land_audio"
+            android:layout_marginRight="@dimen/mine_padding"
+            android:layout_marginEnd="@dimen/mine_padding"
+            android:src="@drawable/selector_play_land_collect" />
+
+        <ImageView
+            android:id="@+id/btn_land_stream"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/btn_land_collect"
+            android:layout_toStartOf="@id/btn_land_collect"
+            android:layout_marginRight="@dimen/mine_padding"
+            android:layout_marginEnd="@dimen/mine_padding"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_stream_sd"
+            android:contentDescription="@string/app_name_holo" />
+
+        <ImageView
+            android:id="@+id/btn_land_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/btn_land_stream"
+            android:layout_toStartOf="@+id/btn_land_stream"
+            android:layout_marginRight="@dimen/mine_padding"
+            android:layout_marginEnd="@dimen/mine_padding"
+            android:src="@mipmap/ic_play_portrait_settings" />
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/btn_land_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/btn_land_settings"
+            android:layout_toStartOf="@+id/btn_land_settings"
+            android:layout_marginRight="@dimen/mine_padding"
+            android:layout_marginEnd="@dimen/mine_padding"
+            android:src="@mipmap/ic_play_land_share" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:id="@+id/layout_play_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/margin_20"
+            android:paddingStart="@dimen/margin_20"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/btn_land_call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/selector_play_land_call"
+                android:contentDescription="@string/app_name_holo" />
+
+            <ImageView
+                android:id="@+id/btn_land_ptz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20"
+                android:src="@drawable/selector_play_land_ptz"
+                android:contentDescription="@string/app_name_holo" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/margin_20"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:visibility="gone"
+                    android:id="@+id/layout_land_ptz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_23">
+
+                    <ImageView
+                        android:id="@+id/land_ptz_img"
+                        android:layout_width="wrap_content"
+                        android:contentDescription="@string/app_name_holo"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/device_live_hor_ptz_bg" />
+
+                    <ImageView
+                        android:id="@+id/land_ptz_center_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@mipmap/device_live_ptz_center_touch"
+                        android:contentDescription="@string/app_name_holo" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_play_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|right"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:paddingRight="@dimen/margin_20"
+        android:paddingEnd="@dimen/margin_20">
+
+        <ImageView
+            android:id="@+id/btn_land_snap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/selector_play_land_snap"
+            android:contentDescription="@string/app_name_holo" />
+
+        <ImageView
+            android:id="@+id/btn_land_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20"
+            android:src="@drawable/selector_play_land_record"
+            android:contentDescription="@string/app_name_holo" />
+
+        <ImageView
+            android:id="@+id/btn_land_playback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20"
+            android:src="@drawable/selector_play_land_playback"
+            android:contentDescription="@string/app_name_holo" />
+
+        <ImageView
+            android:id="@+id/btn_land_playback_cloud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20"
+            android:src="@drawable/selector_play_land_playback_cloud"
+            android:contentDescription="@string/app_name_holo" />
+
+
+    </LinearLayout>
+
+</FrameLayout>

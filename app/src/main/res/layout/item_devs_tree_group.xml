@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="@color/bg_settings"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <CheckBox
+        android:visibility="gone"
+        android:id="@+id/check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/mine_padding"
+        android:layout_marginEnd="@dimen/mine_padding"
+        android:button="@drawable/selector_node_checkbox"
+        android:gravity="center_vertical"
+        android:text=""/>
+
+    <com.mcxtzhang.swipemenulib.SwipeMenuLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:id="@+id/swipeMenu"
+        android:clickable="true"
+        android:focusable="true"
+        app:ios="true"
+        app:leftSwipe="true"
+        app:swipeEnable="true">
+
+        <LinearLayout
+            android:id="@+id/layout_group_item"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:paddingLeft="@dimen/margin_14"
+            android:paddingRight="@dimen/margin_14"
+            android:background="@drawable/selector_bg_user_group_view">
+
+            <TextView
+                android:id="@+id/tv_group_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textSize="@dimen/text_size_16"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tv_device_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:ellipsize="end"
+                android:textSize="@dimen/text_size_13"
+                android:textColor="@color/dev_org_count"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btn_edit"
+            android:layout_width="68dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@color/main"
+            android:text="@string/rename"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/btn_delete"
+            android:layout_width="68dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/bg_tree_delete"
+            android:text="@string/delete"
+            android:textSize="@dimen/text_size_14"
+            android:textColor="@android:color/white" />
+
+    </com.mcxtzhang.swipemenulib.SwipeMenuLayout>
+
+</LinearLayout>

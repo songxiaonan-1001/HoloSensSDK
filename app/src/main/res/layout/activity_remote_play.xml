@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- 播放区域 -->
+        <RelativeLayout
+            android:id="@+id/play_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/multi_window_height">
+
+            <SurfaceView
+                android:id="@+id/playsurface"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
+                android:layout_centerInParent="true" />
+
+            <com.huawei.holosens.live.playback.view.ConnectView
+                android:id="@+id/connectview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/layout_add"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:background="@color/bg_play_add">
+
+                <ImageView
+                    android:id="@+id/btn_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="@dimen/margin_10"
+                    android:src="@mipmap/ic_glass_add" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- 竖屏功能 -->
+        <LinearLayout
+            android:id="@+id/layout_playback_function"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/play_layout"
+            android:gravity="bottom"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <!-- 竖屏按钮 -->
+            <LinearLayout
+                android:id="@+id/remote_vertical_bar_line"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_50"
+                android:orientation="horizontal"
+                android:background="@color/bg_play_nav_portrait"
+                android:gravity="center_vertical">
+
+                <ImageButton
+                    android:id="@+id/audio_vbtn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/selector_play_portrait_audio"
+                    android:background="@color/transparent"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="@dimen/normal_dev_divide_line"
+                    android:layout_height="@dimen/mine_padding"
+                    android:background="@color/line_play_nav_portrait" />
+
+                <ImageButton
+                    android:id="@+id/capture_vbtn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@mipmap/ic_playback_portrait_snap"
+                    android:background="@color/transparent"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="@dimen/normal_dev_divide_line"
+                    android:layout_height="@dimen/mine_padding"
+                    android:background="@color/line_play_nav_portrait" />
+
+                <ImageButton
+                    android:id="@+id/record_vbtn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/selector_playback_portrait_record"
+                    android:background="@color/transparent"
+                    android:textSize="12sp" />
+
+                <View
+                    android:visibility="gone"
+                    android:layout_width="@dimen/normal_dev_divide_line"
+                    android:layout_height="@dimen/mine_padding"
+                    android:background="@color/line_play_nav_portrait" />
+
+                <ImageButton
+                    android:visibility="gone"
+                    android:id="@+id/btn_portrait_collect"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@drawable/selector_playback_portrait_collect"
+                    android:background="@color/transparent"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="@dimen/normal_dev_divide_line"
+                    android:layout_height="@dimen/mine_padding"
+                    android:background="@color/line_play_nav_portrait" />
+
+                <ImageButton
+                    android:id="@+id/fullscreen_vbtn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:src="@mipmap/ic_play_fullscreen"
+                    android:background="@color/transparent"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/time_scale_view_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingTop="@dimen/margin_8"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/linearlayout_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal|bottom"
+                    android:paddingBottom="@dimen/margin_10"
+                    android:gravity="center"
+                    android:background="@mipmap/bg_remote_time">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/ic_remote_time" />
+
+                    <TextView
+                        android:id="@+id/select_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_marginStart="@dimen/margin_10"
+                        android:gravity="center"
+                        android:text="00:00:00"
+                        android:maxLines="1"
+                        android:textColor="@color/remote_time"
+                        android:textSize="@dimen/text_size_14" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/select_time_land"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/margin_2"
+                android:gravity="center"
+                android:text="00:00:00"
+                android:textColor="@color/white_60"
+                android:textSize="@dimen/text_size_14" />
+
+            <!-- 时间轴 -->
+            <com.huawei.holosens.live.playback.view.timeline.ScaleView
+                android:id="@+id/scaleview"
+                android:layout_width="match_parent"
+                android:layout_height="62dp" />
+
+            <LinearLayout
+                android:id="@+id/layout_playback_speed"
+                android:layout_width="match_parent"
+                android:layout_height="98dp"
+                android:background="@color/bg_playback_speed"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/btn_slow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_play_speed_portrait_slow"
+                    android:contentDescription="@string/app_name_holo" />
+
+                <ImageView
+                    android:background="@color/transparent"
+                    android:id="@+id/play_pause_img"
+                    android:src="@mipmap/ic_play_speed_portrait_paused"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_70"
+                    android:layout_marginRight="@dimen/margin_70"/>
+
+                <ImageView
+                    android:id="@+id/btn_fast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_play_speed_portrait_fast"
+                    android:contentDescription="@string/app_name_holo" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!-- 横屏布局 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/left_hbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/ic_play_land_back"/>
+
+        <!-- 横屏按钮 -->
+        <include
+            android:id="@+id/remote_horizon_bar_line"
+            layout="@layout/layout_remote_play_land"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <!--设备列表-->
+    <FrameLayout
+        android:id="@+id/device_list_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- 日历布局 -->
+    <include
+        android:visibility="gone"
+        android:id="@+id/calendar_layout"
+        layout="@layout/layout_calendar" />
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/iv_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:background="@color/black"
+        android:src="@mipmap/ic_playback_guide_1"/>
+
+</RelativeLayout>

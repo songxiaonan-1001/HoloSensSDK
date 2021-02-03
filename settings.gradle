@@ -1,0 +1,2 @@
+include ':app', ':NetModule', ':BasicModule'
+rootProject.name='HoloSensSDK'

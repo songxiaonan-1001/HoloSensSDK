@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/topbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/white"
+        tools:ignore="UselessParent">
+
+        <!-- 左侧 -->
+        <RelativeLayout
+            android:id="@+id/rlyt_left"
+            android:layout_width="@dimen/margin_100"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            tools:ignore="RtlHardcoded">
+            <FrameLayout
+                android:id="@+id/left_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                tools:ignore="RtlHardcoded">
+
+                <TextView
+                    android:id="@+id/tv_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16"
+                    android:visibility="gone"
+                    tools:ignore="RtlHardcoded" />
+
+                <ImageView
+                    android:id="@+id/iv_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:layout_marginRight="@dimen/margin_10"
+                    android:contentDescription="@null" />
+            </FrameLayout>
+
+            <!--左侧扩展按钮-->
+            <ImageView
+                android:id="@+id/left_btn_extend"
+                android:layout_width="@dimen/margin_45"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/left_btn"
+                android:contentDescription="@null"
+                android:scaleType="centerInside"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:visibility="gone"
+                tools:ignore="RtlHardcoded" />
+
+        </RelativeLayout>
+
+        <!-- 右侧 -->
+        <LinearLayout
+            android:id="@+id/rlyt_right"
+            android:layout_width="@dimen/margin_100"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true"
+            android:gravity="end"
+            android:layout_alignParentEnd="true">
+
+            <!--右侧扩展按钮-->
+            <ImageView
+                android:id="@+id/right_btn_extend"
+                android:layout_width="@dimen/margin_45"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@null"
+                android:scaleType="centerInside"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tv_right_extend"
+                android:layout_width="@dimen/margin_45"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/main"
+                android:textSize="@dimen/text_size_14"
+                android:visibility="gone" />
+
+            <FrameLayout
+                android:id="@+id/right_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:contentDescription="@null"
+                    android:layout_marginEnd="@dimen/margin_15" />
+
+                <TextView
+                    android:id="@+id/tv_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:textColor="@color/main"
+                    android:textSize="@dimen/text_size_16"
+                    android:visibility="gone"
+                    android:layout_marginEnd="@dimen/margin_15" />
+            </FrameLayout>
+
+        </LinearLayout>
+
+
+        <!-- 中间 -->
+        <LinearLayout
+            android:id="@+id/content_lyt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_toRightOf="@+id/rlyt_left"
+            android:layout_toLeftOf="@+id/rlyt_right"
+            android:layout_toEndOf="@+id/rlyt_left"
+            android:layout_toStartOf="@+id/rlyt_right">
+
+            <TextView
+                android:id="@+id/center_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:ellipsize="marquee"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:text="title"
+                android:textFontWeight="500"
+                android:textColor="@color/local_dev_text_color"
+                android:textSize="@dimen/text_size_18" />
+
+            <!-- 下拉按钮 -->
+            <ImageView
+                android:id="@+id/iv_pulldown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_5"
+                android:src="@mipmap/icon_tree_up_normal"
+                android:visibility="gone"
+                android:contentDescription="@string/app_name_holo"
+                android:layout_marginStart="@dimen/margin_5" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

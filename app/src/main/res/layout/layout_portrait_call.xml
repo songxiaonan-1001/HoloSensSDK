@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_52"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <FrameLayout
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+
+            <com.huawei.holosens.view.indicator.AVLoadingIndicatorView
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:indicatorColor="@color/colorPrimary"
+                app:indicatorName="LineScalePulseOutRapidIndicator"/>
+
+            <ImageView
+                android:id="@+id/iv_calling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/calling" />
+
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/btn_portrait_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_34"
+            android:src="@mipmap/ic_play_portrait_calling"
+            android:contentDescription="@string/app_name_holo" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/btn_close_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/margin_20"
+        android:src="@mipmap/ic_playfunc_close_default"
+        android:contentDescription="@string/app_name_holo"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

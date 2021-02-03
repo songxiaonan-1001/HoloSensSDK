@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" tools:ignore="StateListReachable">
+
+    <item android:drawable="@mipmap/ic_play_land_playback_disabled_cloud" android:state_enabled="false" />
+    <item android:drawable="@mipmap/ic_play_land_playback_normal_cloud" android:state_enabled="true" android:state_pressed="false" />
+    <!--<item android:state_enabled="true" android:state_pressed="true"
+        android:drawable="@mipmap/ic_play_land_playback_pressed" />-->
+
+</selector>

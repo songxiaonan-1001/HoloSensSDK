@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#01b9d3</color>
+
+    <!--    标题栏-->
+    <color name="main">#01b9d3</color>
+    <color name="main_pressed">#1AA8BC</color>
+    <!-- 基础色 -->
+    <color name="white">#FFFFFF</color>
+    <color name="white_60">#99FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="black_70">#b2000000</color>
+    <color name="black_50">#80000000</color>
+    <color name="black_25">#40000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="half_transparent">#50000000</color>
+    <color name="red">#FF0000</color>
+
+
+    <!--    隐私协议-->
+    <!--    我的-->
+
+    <!--文字颜色值-->
+    <color name="text">#393943</color>
+    <!--    横向线条颜色值-->
+    <color name="line_color">#edeff2</color>
+    <!--    竖向线条颜色值-->
+
+    <!--Toast背景颜色-->
+    <color name="bg_toast">#CC000000</color>
+    <!--Toast背景颜色end-->
+
+    <!-- 实时预览start -->
+    <color name="border_color">#d8d8d8</color>
+    <color name="points_color">#d1d4d9</color>
+    <color name="bg_play_add">#111216</color>
+    <color name="bg_play_function">#F2F4F9</color>
+    <color name="bg_play_nav_portrait">#222222</color>
+    <color name="line_play_nav_portrait">#CFD1D5</color>
+    <color name="stream">#F2F4FB</color>
+    <color name="bg_stream">#AA0B1117</color>
+    <color name="bg_playback_speed">#FBFBFC</color>
+    <!-- 实时预览end -->
+
+    <!--Dialog弹框分隔线-->
+    <color name="bg_dialog">#F9F9F9</color>
+    <color name="divider_line_dialog">#E7E7EA</color>
+    <color name="dialog_context_color">#030303</color>
+    <color name="dialog_progress_ng_color">#D1D6D9</color>
+    <color name="dialog_cancel_text">#555555</color>
+    <color name="dialog_text_disable">#B2B2B3</color>
+
+    <!--    标题栏     -->
+    <color name="window">#F2F3F5</color>
+    <!--    标题栏 End     -->
+
+    <color name="edit_line">#999999</color>
+    <color name="gray">#EBEFF8</color>
+
+    <!--    我的视图-->
+    <!--    我的视图end-->
+
+    <!--    意见反馈-->
+
+    <!--    zxing-->
+    <!-- 半透明白色 -->
+    <!--    zxing end-->
+
+    <!-- 回放start -->
+    <!-- 5种报警类型颜色 -->
+    <color name="alarm_nofile">#f7f8f9</color>
+    <color name="alarm_kind_N">#01B9D3</color>
+    <color name="alarm_kind_T">#01B9D3</color>
+    <color name="alarm_kind_M">#FF5558</color>
+    <color name="alarm_kind_A">#FF5558</color>
+    <color name="alarm_kind_O">#01B9D3</color>
+    <color name="alarm_kind_C">#01B9D3</color>
+    <color name="alarm_kind_I">#01B9D3</color>
+    <color name="popwindwow_text_content_color">#8c9094</color>
+
+    <color name="remote_time">#99565A5D</color>
+
+    <!-- 回放end -->
+
+
+    <color name="edit_text_hint_new">#ADAFB4</color>
+    <color name="edit_text_hint">#F7F8F8</color>
+    <color name="edit_text_input">#13151A</color>
+    <color name="edit_text_line">#E7E7EA</color>
+    <color name="edit_text_error">#FF3824</color>
+    <color name="subtitle">#57595E</color>
+    <color name="bg_settings">#F7F8F9</color>
+    <color name="option_content">#8F8F8F</color>
+
+
+    <!--    用户管理-->
+
+    <color name="delete_color">#FE3B30</color>
+    <!--    用户管理end-->
+
+    <!--    设备管理-->
+    <!--    设备管理end-->
+
+    <!--    本地收藏-->
+
+    <color name="local_dev_text_color">#D9000000</color>
+    <!--    本地收藏end-->
+
+    <!--    本地文件-->
+    <!--    本地文件end-->
+
+    <!--    告警消息-->
+    <!--    告警消息end-->
+
+    <!--统计分析start-->
+    <color name="today">#01AAC1</color>
+    <color name="today_bg">#4C01b9d3</color>
+    <!--统计分析end-->
+
+
+<!--    指纹-->
+    <color name="finger_check_content_color_1">#D9000000</color>
+    <color name="finger_check_content_color_retry">#80000000</color>
+    <color name="finger_check_content_color_fail">#FF030303</color>
+    <color name="finger_dialog_line">#0F3F3F3F</color>
+<!--    指纹end-->
+
+
+    <color name="dev_org_count">#565A5D</color>
+    <color name="enterprise_detail">#666666</color>
+
+</resources>

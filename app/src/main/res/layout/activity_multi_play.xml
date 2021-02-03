@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--标题栏-->
+    <!--
+        因为分屏的导航页的设计, 必须要把头部放进来。:)
+    -->
+    <com.huawei.holosens.view.TopBarLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <FrameLayout
+        android:id="@+id/flyt_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topbar"
+        android:background="@color/black">
+        <!--播放区域-->
+        <FrameLayout
+            android:id="@+id/play_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/mine_padding"
+            android:layout_gravity="right">
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/btn_portrait_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/selector_play_portrait_share" />
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/btn_portrait_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/mine_padding"
+                android:src="@drawable/selector_play_portrait_settings" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_page"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="@dimen/margin_12"
+            android:background="@drawable/shape_page"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_9"
+            android:textColor="@color/white"
+            android:text="" />
+
+        <!--横屏顶部状态栏-->
+        <FrameLayout
+            android:id="@+id/nav_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!--分屏选择列表-->
+        <FrameLayout
+            android:visibility="gone"
+            android:id="@+id/layout_multi_screen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <GridView
+                android:id="@+id/lv_select"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/multi_capture_height"
+                android:layout_gravity="bottom"
+                android:background="@color/bg_stream"
+                android:cacheColorHint="@color/transparent"
+                android:numColumns="4"
+                android:divider="@null"
+                android:fadingEdge="none"
+                android:fastScrollEnabled="false"
+                android:scrollbars="none" />
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <!--竖屏播放区域底部功能栏-->
+    <FrameLayout
+        android:id="@+id/nav_portrait_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/flyt_top" />
+
+    <!--底部功能区域-->
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/functions_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/nav_portrait_fragment_container" />
+
+    <RelativeLayout
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_50"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normal_dev_divide_line"
+            android:background="@color/border_color"/>
+
+        <CheckBox
+            android:id="@+id/cb_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/mine_padding"
+            android:layout_marginRight="@dimen/margin_10"
+            android:button="@drawable/selector_checkbox_grey" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/cb_all"
+            android:layout_marginRight="@dimen/margin_4"
+            android:text="@string/dev_has_selected"
+            android:textColor="@color/local_dev_text_color"
+            android:textSize="@dimen/text_size_15" />
+
+        <TextView
+            android:id="@+id/selected_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/select"
+            android:layout_toRightOf="@id/select"
+            android:text="@string/check_all"
+            android:textColor="@color/main"
+            android:textSize="@dimen/text_size_15" />
+
+        <TextView
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/margin_16"
+            android:text="@string/delete_all"
+            android:textColor="@color/delete_color"
+            android:textSize="@dimen/text_size_15" />
+
+    </RelativeLayout>
+
+    <!--设备列表-->
+    <FrameLayout
+        android:id="@+id/device_list_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/iv_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:background="@color/black"
+        android:src="@mipmap/ic_play_guide_1"/>
+
+</RelativeLayout>

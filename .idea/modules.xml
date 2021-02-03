@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BasicModule/BasicModule.iml" filepath="$PROJECT_DIR$/.idea/modules/BasicModule/BasicModule.iml" group="HoloSensSDK/BasicModule" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/HoloSensSDK.iml" filepath="$PROJECT_DIR$/.idea/modules/HoloSensSDK.iml" group="HoloSensSDK" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/NetModule/NetModule.iml" filepath="$PROJECT_DIR$/.idea/modules/NetModule/NetModule.iml" group="HoloSensSDK/NetModule" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="HoloSensSDK/app" />
+    </modules>
+  </component>
+</project>

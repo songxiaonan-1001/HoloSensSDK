@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="alert">提醒</string>
+    <string name="alert_info">您的登录已失效,请重新登录</string>
+    <string name="quit_info">该账号已被其他设备登录</string>
+
+</resources>

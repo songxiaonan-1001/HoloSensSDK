@@ -1,0 +1,369 @@
+<resources>
+    <string name="app_name_holo">好望云服务Android SDK</string>
+
+    <string name="cancel">取消</string>
+    <string name="sure">确定</string>
+
+    <!--    隐私协议-->
+
+    <!--    <string name="dialog_kindly_tip">温馨提醒</string>-->
+    <!--    <string name="dialog_permission_tips">为向您提供更加安全优质的服务，保证功能的正常使用，云视通向您申请以下权限：</string>-->
+    <!--    <string name="dialog_permission_position_tips">定位：使用您的位置保证声波配置设备的正常使用以及网络等问题的定位解决</string>-->
+    <!--    <string name="dialog_permission_storage_tips">存储：访问您的照片、媒体内容和文件保证录制或抓拍的录像或图片的正常查看</string>-->
+    <!--    <string name="dialog_permission_device_info_tips">设备信息：保障账户安全和相关问题的定位解决、支持APP内一键拨打客服电话，获取设备通通话状态、IMEI等设备识别符</string>-->
+    <!--    <string name="dialog_permission_mic_tips">麦克风：允许使用麦克风功能开启语音对讲功能</string>-->
+    <!--    <string name="dialog_permission_record_tips">拍摄录制：允许拍摄照片和录制视频，实现扫描二维码添加设备、抓拍/录制视频或照片的功能</string>-->
+    <!--    <string name="dialog_permission_position">定位</string>-->
+    <!--    <string name="dialog_permission_storage">存储</string>-->
+    <!--    <string name="dialog_permission_device_info">设备信息</string>-->
+    <!--    <string name="dialog_permission_mic">麦克风</string>-->
+    <!--    <string name="dialog_permission_record">拍摄录制</string>-->
+
+    <string name="input_space_tip">输入内容不能全为空格</string>
+
+    <!--登录-->
+    <!--登录end-->
+
+    <!--主页-->
+    <string name="rename">重命名</string>
+
+    <!--    问候-->
+    <string name="good_morning">早上好</string>
+    <string name="good_afternoon">下午好</string>
+    <string name="good_night">晚上好</string>
+    <string name="good_before_dawn">凌晨好</string>
+    <!--问候end    -->
+
+    <!--主页 end-->
+
+    <!--分享管理 start-->
+    <!--分享管理 end-->
+
+    <!--我的组织start-->
+    <!--我的组织end-->
+
+    <!--    选择企业-->
+
+    <!--    选择企业end-->
+
+    <!--    app更新-->
+    <string name="update_title">发现新版本</string>
+    <string name="new_version">新版本</string>
+    <string name="update_msg">更新内容</string>
+    <string name="update_sure">立即更新</string>
+    <string name="update_cancel">以后再说</string>
+    <string name="update_downloading">正在下载</string>
+    <string name="update_downloading_check_failed">文件校验失败，请重新下载</string>
+    <!--    app更新end-->
+    <!--修改用户名-->
+    <!--修改用户名end-->
+    <!--隐私与安全-->
+    <!--隐私与安全end-->
+    <!--设置-->
+    <!--设置end-->
+    <!--帮助与反馈-->
+    <!--帮助与反馈end-->
+
+    <!--关于-->
+
+    <!--关于end-->
+    <!--我的收藏-->
+    <!--我的收藏 end-->
+
+    <!--权限-->
+    <string name="permission_storage">存储权限</string>
+    <string name="permission_contacts">获取手机信息权限</string>
+    <string name="permission_location">定位权限</string>
+    <string name="permission_record_audio">录音权限</string>
+    <string name="permission_camera">相机权限</string>
+    <string name="permission_conn_list">通讯录权限</string>
+    <string name="permission_request">请允许以下权限(%s)，否则应用程序可能无法正常工作！</string>
+    <string name="tips">提示</string>
+    <!--权限 End-->
+
+    <!-- 登录模块start -->
+    <string name="forget_password">忘记密码</string>
+    <!-- 登录模块end -->
+
+    <!--我的视图-->
+    <string name="top_collection">置顶收藏</string>
+    <string name="save_view">收藏</string>
+    <string name="input_view_name">请输入名称</string>
+    <string name="save_view_succes">保存成功</string>
+    <string name="view_limit_info">输入名称不能超过16个字符～</string>
+    <!--我的视图end-->
+
+    <!--文件管理-->
+    <!--文件管理end-->
+
+    <!--    报警消息-->
+    <string name="check_all">全选</string>
+    <string name="delete_all">全部删除</string>
+
+    <!--    报警消息end-->
+    <!--设备-->
+    <string name="edit">编辑</string>
+    <string name="delete">删除</string>
+    <string name="no_register">未注册</string>
+    <string name="history_video_playback">录像回放</string>
+    <string name="pan_tilt_control_failed">获取云台控制权限失败</string>
+    <string name="nvr">NVR</string>
+    <string name="ipc">摄像机</string>
+
+    <!--二维码扫描-->
+    <string name="ipc_num">摄像机&#160;&#160;&#160;&#160;</string>
+    <string name="dev_has_selected">已选择</string>
+    <string name="device_no_line">设备不在线</string>
+    <!--设备end-->
+
+    <!--    用户管理-->
+    <!--    用户管理end-->
+
+
+    <!--    搜索-->
+    <!--    搜索end-->
+    <!-- 网页 -->
+    <!--网页end-->
+
+    <!--    意见反馈-->
+    <string name="feedback_photo">拍照</string>
+    <string name="feedback_album">相册</string>
+    <!--    意见反馈end-->
+
+    <!-- 视频播放模块 -->
+    <string name="play_without_wifi">正在使用流量播放</string>
+    <string name="connect_failed_error_area">温馨提示：您所购买的产品非本区域专供型号，\n已被限制连接网络，请联系当地销售商！</string>
+    <string name="prepare">准备连接中&#8230;</string>
+    <string name="connectting">视频连接中&#8230;</string>
+    <string name="buffering1">视频缓冲中</string>
+    <string name="buffering2">视频缓冲中&#8230;</string>
+    <string name="disconnected">视频已断开</string>
+    <string name="click_to_connect">点击继续播放</string>
+
+    <string name="changestream_success">切换成功</string>
+
+    <string name="wait_add_channel">请添加通道后再进行此操作</string>
+    <string name="wait_connect">请等待视频连接成功再进行此操作</string>
+
+    <string name="video_change">设备画质切换，录像重新打包。</string>
+
+    <string name="video_path">录像保存在%s</string>
+    <string name="sdcard_out_memery">您的手机未插入SDCard,暂时无法使用此功能.</string>
+    <string name="sdcard_notenough">您的手机内存卡内存不足</string>
+    <string name="record_short_failed">录像时间过短，请确保录像时间大于5秒</string>
+    <string name="record_time_tip">%ds后可保存视频</string>
+
+    <string name="zoom">变倍</string>
+    <string name="focus">变焦</string>
+    <string name="iris">光圈</string>
+
+    <string name="call_nvr">NVR对讲</string>
+    <string name="call_channel">通道对讲</string>
+    <string name="on_call">正在通话中，请稍后再试</string>
+
+    <string name="watch">查看</string>
+
+    <string name="live_title">实况浏览</string>
+    <string name="play_live">开始实况浏览</string>
+
+    <string name="collect_success">已收藏</string>
+    <string name="collect_cancel">取消收藏</string>
+
+    <string name="delete_channel_tip">确认要删除通道吗？</string>
+
+    <!-- 远程回放 -->
+    <string name="video_normal">全天录像</string>
+    <string name="video_alarm">报警录像</string>
+    <string name="video_stop">停止录像</string>
+    <string name="video_motion">移动检测</string>
+    <string name="video_time">定时录像</string>
+    <string name="video_ch_frame">缩时录像</string>
+    <string name="video_smart">区域检测报警录像</string>
+    <string name="video_one_min">微视频录像</string>
+    <string name="video_nodata_failed">暂无远程视频文件</string>
+    <string name="play_failed"> 播放失败</string>
+    <string name="play_over">播放结束</string>
+    <string name="connect_failed">视频连接失败</string>
+    <string name="abnormal_closed">连接异常断开</string>
+    <string name="pause_wait_connect">暂停状态下不可操作</string>
+    <string name="loading_data">数据加载中</string>
+    <string name="exit">再按一次退出程序</string>
+    <!-- 视频播放模块end -->
+
+    <!-- 统计分析start -->
+    <!-- 统计分析end -->
+
+    <!--    指纹验证-->
+    <string name="finger_title">开启指纹解锁</string>
+    <string name="finger_content">开启指纹登录,享受华为好望极致安全护航</string>
+
+    <string name="finger_try_again">再试一次</string>
+    <string name="finger_try_again_content">轻触验证指纹</string>
+    <string name="finger_fail">本次指纹验证失败，请下次再试!</string>
+
+    <string name="finger_no">暂不开启</string>
+    <string name="finger_yes">立即启动</string>
+    <!--    指纹验证 end-->
+
+    <!--    错误统计-->
+    <string name="erro_500">服务内部发生错误</string>
+    <string name="erro_999">上层服务异常，请求被熔断</string>
+    <string name="erro_1002">参数格式异常</string>
+    <string name="erro_1003">数据库错误</string>
+    <string name="erro_1005">无效句柄</string>
+    <string name="erro_1006">服务器内部错误</string>
+    <string name="erro_2000">网络请求超时</string>
+    <string name="erro_4000">网络请求失败，请稍后再试</string>
+    <string name="erro_20001">操作失败</string>
+    <string name="erro_20002">无效参数</string>
+    <string name="erro_20003">内部服务异常</string>
+    <string name="erro_21001">用户分组已存在</string>
+    <string name="erro_21002">分组不属于用户</string>
+    <string name="erro_21004">账号不存在</string>
+    <string name="erro_21005">账号已存在</string>
+    <string name="erro_21006">账号不合法</string>
+    <string name="erro_21007">验证码错误</string>
+    <string name="erro_21008">修改密码失败</string>
+    <string name="erro_21009">注册用户失败</string>
+    <string name="erro_21010">未查到数据内容</string>
+    <string name="erro_21011">密码格式不正确</string>
+    <string name="erro_21012">密码不能与用户名或用户名倒写相同</string>
+    <string name="erro_21013">用户名或密码错误</string>
+    <string name="erro_21014">账号锁定,需验证码登录</string>
+    <string name="erro_21015">tiken 过期</string>
+    <string name="erro_21016">token 过期</string>f
+    <string name="erro_21017">原密码错误</string>
+    <string name="erro_21018">用户分组不存在</string>
+    <string name="erro_21019">默认分组不可删除</string>
+    <string name="erro_21020">推送验证码失败</string>
+    <string name="erro_21021">设备默认分组添加失败</string>
+    <string name="erro_21022">获取验证码频繁</string>
+    <string name="erro_21023">用户不属于管理员</string>
+    <string name="erro_21024">登录失败</string>
+    <string name="erro_21025">用户不是管理员</string>
+    <string name="erro_21028">新旧密码相同</string>
+    <string name="erro_21029">添加用户默认分组失败</string>
+    <string name="erro_21030">上传app版本低</string>
+    <string name="erro_21031">ip变更token过期</string>
+    <string name="erro_21032">该账号被其他设备登录</string>
+    <string name="erro_21033">新密码不能与旧密码相同</string>
+    <string name="erro_21036">密码错误</string>
+    <string name="erro_21037">用户无权限，请联系企业管理员</string>
+    <string name="erro_21038">企业或组织不存在</string>
+    <string name="erro_21039">用户组织根节点不能删除</string>
+    <string name="erro_21040">用户分组等级达到上限</string>
+    <string name="erro_21041">用户不属于该企业</string>
+    <string name="erro_21042">用户不属于该组织</string>
+    <string name="erro_21043">用户组织不属于该企业</string>
+    <string name="erro_21044">企业下没有员工</string>
+    <string name="erro_21045">输入无有效用户</string>
+    <string name="erro_21046">节点父节点不可与原来相同</string>
+    <string name="erro_21047">用户组织名称已存在</string>
+    <string name="erro_21048">用户父级分组不存在</string>
+    <string name="erro_21049">企业不存在</string>
+    <string name="erro_21050">用户没有被邀请</string>
+    <string name="erro_21051">用户已经被激活</string>
+    <string name="erro_21052">用户删除企业被锁定，稍后重试</string>
+    <string name="erro_21053">用户不能删除自己</string>
+    <string name="erro_21054">用户拥有子组织，不允许删除</string>
+    <string name="erro_21055">企业暂无管理员</string>
+    <string name="erro_21056">企业已存在</string>
+    <string name="erro_21057">企业验证失败</string>
+    <string name="erro_21058">企业未认证</string>
+    <string name="erro_21059">账号锁定，请%d分钟之后再试</string>
+    <string name="erro_21060">用户已冻结</string>
+    <string name="erro_21061">管理员未激活</string>
+    <string name="erro_21062">用户已经被邀请</string>
+
+    <string name="erro_22001">设备不属于用户</string>
+    <string name="erro_22002">分组名称不能重复</string>
+    <string name="erro_22003">管理员未添加默认分组</string>
+    <string name="erro_22004">未查到数据内容</string>
+    <string name="erro_22005">设备查询错误</string>
+    <string name="erro_22006">获取设备组失败</string>
+    <string name="erro_22007">序列号或验证码错误</string>
+    <string name="erro_22008">设备已被绑定</string>
+    <string name="erro_22009">获取分组失败</string>
+    <string name="erro_22010">设备已被别人占用</string>
+    <string name="erro_22011">control_token已失效</string>
+    <string name="erro_22012">收藏不属于用户</string>
+    <string name="erro_22013">收藏不存在</string>
+    <string name="erro_22014">名称重复，请修改收藏名称</string>
+    <string name="erro_22015">用户添加设备锁定</string>
+    <string name="erro_22016">设备未注册</string>
+    <string name="erro_22017">设备分组不存在</string>
+    <string name="erro_22018">分享已存在</string>
+    <string name="erro_22019">分享不存在</string>
+    <string name="erro_22020">所有设备都达到分享上线</string>
+    <string name="erro_22022">不能给自己分享</string>
+    <string name="erro_22023">分组个数达到上限</string>
+    <string name="erro_22024">单个分组内设备个数达到上限</string>
+    <string name="erro_22025">分享达到上限</string>
+    <string name="erro_22026">设备离线</string>
+    <string name="erro_22027">收藏达到上限</string>
+    <string name="erro_22028">设备树根节点已存在</string>
+    <string name="erro_22029">设备树上级节点不存在</string>
+    <string name="erro_22030">设备树节点过深</string>
+    <string name="erro_22031">节点下存在设备，不能删除</string>
+    <string name="erro_22032">组织名称不合法</string>
+    <string name="erro_22033">组织名称已存在</string>
+    <string name="erro_22034">要移动的设备列表为空</string>
+    <string name="erro_22035">节点父组织不可与原来相同</string>
+    <string name="erro_22036">设备不属于企业</string>
+    <string name="erro_22037">设备组织根节点不可移动</string>
+    <string name="erro_22038">该设备暂无操作员</string>
+    <string name="erro_22039">设备不存在</string>
+    <string name="erro_22040">设备分组暂无管理员</string>
+    <string name="erro_22041">操作员拥有权限更高的角色</string>
+    <string name="erro_22042">列表中无有效设备</string>
+    <string name="erro_22043">目标节点不能原节点子节点</string>
+    <string name="erro_22044">设备不属于企业</string>
+    <string name="erro_22045">列表中无有效的管理员</string>
+    <string name="erro_22046">设备不是NVR</string>
+    <string name="erro_22047">设备不属于NVR</string>
+    <string name="erro_22048">通道不存在</string>
+    <string name="erro_22049">收藏已存在</string>
+    <string name="erro_22050">设备序列号非法</string>
+    <string name="erro_22051">访问协议不合法</string>
+    <string name="erro_22052">获取JVMP URL失败</string>
+    <string name="erro_22053">设备已属于别的企业</string>
+    <string name="erro_22054">操作超时</string>
+    <string name="erro_22055">录像计划中的day type赋值非法</string>
+    <string name="erro_22056">录像计划中的开始时间非法</string>
+    <string name="erro_22057">录像计划中的结束时间非法</string>
+    <string name="erro_22058">录像计划已经存在</string>
+    <string name="erro_22059">平台录像计划不存在</string>
+    <string name="erro_22060">企业管理员达到上限</string>
+    <string name="erro_22061">用户已拥有该设备的管理权限</string>
+    <string name="erro_22062">企业下存在设备，不允许解散</string>
+    <string name="erro_22063">添加设备诶失败</string>
+    <string name="erro_22064">设备不属于国标设备</string>
+    <string name="erro_22065">设备不属于好望设备</string>
+    <string name="erro_22066">通道已被不可用冻结</string>
+    <string name="erro_22067">通道未开通管理套餐</string>
+    <string name="erro_22068">通道未开通全量收录套餐</string>
+    <string name="erro_22069">获取云端录像URL失败</string>
+    <string name="erro_22070">企业下暂无未注册设备</string>
+    <string name="erro_22071">删除设备失败</string>
+    <string name="erro_22072">无有效设备异常</string>
+    <string name="erro_22073">添加通道信息失败</string>
+    <string name="erro_22074">无效设备编号</string>
+    <string name="erro_22075">无效设备账号</string>
+    <string name="erro_22076">无效设备密码</string>
+    <string name="erro_22077">设备组织根节点不能删除</string>
+
+    <!--    错误统计-->
+
+    <string name="erro_17001">频繁提交</string>
+    <string name="erro_17002">文件过大</string>
+
+    <string name="play_back_local">本地录像</string>
+    <string name="play_back_cloud">云服务录像</string>
+    <string name="video_connect_tips">请稍候进行此操作</string>
+
+
+
+    <string name="capture_error">抓拍失败</string>
+
+
+</resources>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/width_280"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/bg_dialog_update"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_24"
+            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginRight="@dimen/margin_24"
+            android:text="@string/update_title"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_17"
+            android:textFontWeight="500"
+            android:visibility="visible"
+            tools:text="@string/update_title" />
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_24"
+            android:layout_marginTop="@dimen/margin_15"
+            android:layout_marginRight="@dimen/margin_24"
+            android:gravity="center|left"
+            android:textFontWeight="500"
+            android:textColor="@color/dialog_context_color"
+            android:textSize="@dimen/text_size_13"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_24"
+            android:layout_marginRight="@dimen/margin_24"
+            android:gravity="center|left"
+            android:textFontWeight="500"
+            android:textColor="@color/dialog_context_color"
+            android:textSize="@dimen/text_size_13"
+            tools:ignore="RtlHardcoded" />
+
+        <LinearLayout
+            android:id="@+id/content_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_24"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginRight="@dimen/margin_24"
+                android:gravity="center|left"
+                android:text="@string/update_msg"
+                android:textFontWeight="500"
+                android:textColor="@color/dialog_context_color"
+                android:textSize="@dimen/text_size_13"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_24"
+                android:layout_marginRight="@dimen/margin_24"
+                android:gravity="center|left"
+                android:textFontWeight="500"
+                android:textColor="@color/dialog_context_color"
+                android:textSize="@dimen/text_size_14"
+                tools:ignore="RtlHardcoded" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/normal_dev_divide_line"
+            android:layout_marginTop="@dimen/margin_25"
+            android:background="@color/divider_line_dialog" />
+
+        <LinearLayout
+            android:id="@+id/dialog_common_btnbottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_44"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/btn_negative"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center"
+                android:text="@string/update_cancel"
+                android:textColor="@color/dialog_cancel_text"
+                android:textSize="@dimen/text_size_17" />
+
+            <View
+                android:id="@+id/dialog_custom_midline"
+                android:layout_width="1dp"
+                android:layout_height="@dimen/margin_52"
+                android:background="@color/divider_line_dialog" />
+
+            <TextView
+                android:id="@+id/btn_neutral"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center"
+                android:minHeight="40dip"
+                android:textColor="@color/text"
+                android:textSize="@dimen/text_size_17"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/btn_positive"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center"
+                android:text="@string/update_sure"
+                android:textColor="@color/main"
+                android:textSize="@dimen/text_size_17" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name_holo"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/icon_update_blue"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

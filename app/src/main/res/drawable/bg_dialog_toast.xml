@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+       android:shape="rectangle">
+
+    <!-- 主要内容的padding 文字距离上下左右的距离 -->
+    <corners android:radius="@dimen/radius_toast"/>
+    <!-- 圆角的半径  也可以统一设置半径 android:radius="9dip" -->
+    <!-- 渐变 -->
+    <solid android:color="@color/bg_toast"/>
+
+</shape>

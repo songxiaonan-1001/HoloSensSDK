@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_80"
+    android:paddingLeft="@dimen/mine_padding"
+    android:paddingStart="@dimen/mine_padding"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="@dimen/text_size_12"
+            android:textColor="@color/enterprise_detail" />
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="@dimen/margin_4"
+            android:paddingRight="6dp"
+            android:paddingEnd="6dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                xmlns:tools="http://schemas.android.com/tools"
+                tools:targetApi="lollipop"
+                android:importantForAutofill="noExcludeDescendants"
+                android:theme="@style/InputLayout"
+                android:id="@+id/et_main"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:background="@null"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textColorHint="@color/black_25"
+                android:textColor="@color/local_dev_text_color"
+                android:textSize="@dimen/text_size_14" />
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/btn_clear"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginEnd="2dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/selector_clear_edit"
+                android:contentDescription="@string/app_name_holo" />
+
+            <ImageView
+                android:id="@+id/btn_eye"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/selector_eye"
+                android:contentDescription="@string/app_name_holo" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:visibility="gone"
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normal_dev_divide_line"
+        android:layout_alignParentBottom="true"
+        android:background="@color/edit_text_line" />
+
+</RelativeLayout>

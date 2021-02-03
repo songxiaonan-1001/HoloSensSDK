@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/margin_20"
+        android:paddingStart="@dimen/margin_20"
+        android:paddingRight="@dimen/margin_20"
+        android:paddingEnd="@dimen/margin_20"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/mine_padding"
+            android:paddingStart="@dimen/mine_padding">
+
+            <TextView
+                android:id="@+id/tv_selected_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/edit_text_input"
+                android:textSize="@dimen/text_size_18"
+                android:text="2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/mine_padding"
+                android:paddingStart="@dimen/mine_padding">
+
+                <TextView
+                    android:id="@+id/tv_selected_week"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/edit_text_hint"
+                    android:textSize="@dimen/text_size_12"
+                    android:text="2020" />
+
+                <TextView
+                    android:id="@+id/tv_selected_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/edit_text_hint"
+                    android:textSize="@dimen/text_size_12"
+                    android:text="2020" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.haibin.calendarview.CalendarView
+            android:id="@+id/calendar_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:week_text_color="@color/text"
+            app:week_view="com.huawei.holosens.view.calendar.HoloWeekView"
+            app:month_view="com.huawei.holosens.view.calendar.HoloPlaybackMonthView"
+            app:month_view_show_mode="mode_fix"
+            app:current_month_text_color="@color/edit_text_input"
+            app:other_month_text_color="@color/edit_text_hint"
+            app:current_day_text_color="@color/today"
+            app:selected_text_color="@color/white"
+            app:scheme_text_color="@color/edit_text_input"/>
+
+    </LinearLayout>
+
+<!--    <View-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/normal_dev_divide_line"-->
+<!--        android:background="@color/line_color"-->
+<!--        android:elevation="1dp"/>-->
+
+</LinearLayout>

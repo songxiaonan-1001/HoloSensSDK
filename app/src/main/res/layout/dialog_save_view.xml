@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="270dp"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:background="@drawable/bg_dialog_update"
+    android:orientation="vertical"
+    android:paddingTop="20dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/save_view"
+        android:textColor="#030303"
+        android:textSize="17sp"
+        android:textFontWeight="500"
+        android:visibility="visible"
+        tools:text="@string/save_view" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.huawei.holosens.view.ClearEditText
+            android:id="@+id/view_name"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:layout_marginLeft="@dimen/mine_padding"
+            android:layout_marginTop="@dimen/margin_20"
+            android:layout_marginRight="@dimen/mine_padding"
+            android:background="@drawable/shape_save_view_edit"
+            android:hint="@string/input_view_name"
+            android:imeOptions="actionDone"
+            android:maxLength="20"
+            android:paddingLeft="5dp"
+            android:singleLine="true"
+            android:textSize="@dimen/text_size_13"
+            android:theme="@style/InputLayout" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/mine_padding"
+        android:gravity="left"
+        android:text="@string/view_limit_info"
+        android:textColor="@color/red"
+        android:textSize="@dimen/text_size_9"
+        android:visibility="invisible" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/normal_dev_divide_line"
+        android:layout_marginTop="5dp"
+        android:background="@color/divider_line_dialog" />
+
+    <LinearLayout
+        android:id="@+id/dialog_common_btnbottom"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/btn_negative"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textColor="#555555"
+            android:textSize="17sp"
+            android:textFontWeight="500" />
+
+        <View
+            android:id="@+id/dialog_custom_midline"
+            android:layout_width="@dimen/normal_dev_divide_line"
+            android:layout_height="match_parent"
+            android:background="@color/divider_line_dialog" />
+
+        <TextView
+            android:id="@+id/btn_neutral"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:minHeight="40dip"
+            android:textColor="#555555"
+            android:textSize="17sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/btn_positive"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/sure"
+            android:textColor="@color/main"
+            android:textSize="@dimen/text_size_17"
+            android:textFontWeight="500" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="OptionItemView">
+        <attr name="leftImage" format="reference" />
+        <attr name="titleText" format="reference" />
+        <attr name="titleStyle" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+        </attr>
+        <attr name="titleTextColor" format="color" />
+        <attr name="subtitleText" format="reference" />
+        <attr name="content" format="reference" />
+        <attr name="showTitlePoint" format="boolean" />
+        <attr name="rightImageStyle" format="enum">
+            <enum name="gone" value="0" />
+            <enum name="arrow" value="1" />
+            <enum name="check" value="2" />
+            <enum name="on_off" value="3" />
+        </attr>
+        <attr name="bottomLineHeight" format="dimension" />
+        <attr name="checked" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="AVLoadingIndicatorView">
+        <attr name="minWidth" format="dimension" />
+        <attr name="maxWidth" format="dimension"/>
+        <attr name="minHeight" format="dimension" />
+        <attr name="maxHeight" format="dimension"/>
+        <attr name="indicatorName" format="string"/>
+        <attr name="indicatorColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="HoloTextInputLayout">
+        <attr name="clearEnable" format="boolean" />
+        <attr name="passwordEnable" format="boolean" />
+        <attr name="forgetPasswordEnable" format="boolean" />
+        <attr name="longHint" format="string" />
+        <attr name="shortHint" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="HoloEditTextLayout">
+        <attr name="enableClear" format="boolean" />
+        <attr name="enablePassword" format="boolean" />
+        <attr name="title" format="string" />
+        <attr name="hint" format="string" />
+        <attr name="showBottomLine" format="boolean" />
+        <attr name="isedit" format="boolean" />
+        <attr name="edit_max_length" format="integer" />
+    </declare-styleable>
+    
+    <declare-styleable name="SourceHanTextView">
+        <attr name="typefaceSh" format="enum">
+            <enum name="regular" value="0"/>
+            <enum name="medium" value="1"/>
+            <enum name="bold" value="2"/>
+        </attr>
+    </declare-styleable>
+</resources>

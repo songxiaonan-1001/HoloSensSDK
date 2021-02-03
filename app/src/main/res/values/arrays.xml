@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+
+    <!-- stream数组 -->
+    <string-array name="array_stream">
+        <item>标清</item>
+        <item>高清</item>
+    </string-array>
+
+    <string-array name="c2_connect_state">
+        <item>其他未知错误</item>
+        <!-- <item>参数错误</item>
+         <item>句柄失效</item>-->
+        <item>连接失败</item>
+        <item>连接失败</item>
+        <item>用户终止操作</item>
+        <item>IP地址有误</item>
+        <item>创建套接字失败</item>
+        <item>系统调用失败</item>
+        <item>连接超时</item>
+        <item>连接失败</item>
+        <item>用户验证失败</item>
+        <item>连接异常断开</item>
+        <item>内存不足</item>
+        <item>操作超时</item>
+        <item>系统资源不足</item>
+        <item>启动线程失败（内存不够）</item>
+        <item>系统资源不足</item>
+        <item>应用层调用顺序有误</item>
+        <item>序列化编码失败</item>
+        <item>解码数据失败</item>
+        <item>网络错误</item>
+        <item>网络错误</item>
+        <item>网络错误</item>
+        <item>网络错误</item>
+        <item>重复调用</item>
+        <item>设备侧UOID错误</item>
+        <item>无效的设备识别码</item>
+        <item>要操作的设备未上线</item>
+        <item>设备离线</item>
+        <item>要进行的操作对端还没有准备好</item>
+        <item>对端资源不足</item>
+        <item>服务器拒绝设备上线</item>
+        <item>设备端才有</item>
+        <item>设备端才有</item>
+        <item>连接数超过最大限制</item>
+        <item>到达转发服务器单次连接时间限制</item>
+        <item>通道号或者码流号不对</item><!-- 51 -->
+        <item>没有设置设备信息</item><!-- 52 -->
+        <item>加密类型不匹配</item><!-- 53 -->
+        <item>超过点播数据缓存上限</item><!-- 54 -->
+        <item>设备侧不支持的连接协议 </item><!-- 55 -->
+        <item>云转发</item><!-- 56 -->
+        <item>通道离线</item><!-- 57 -->
+    </string-array>
+
+    <!-- 窗户上的玻璃数量 -->
+
+    <!-- 日历控件星期 -->
+    <string-array name="array_calendar_week">
+        <item>日</item>
+        <item>一</item>
+        <item>二</item>
+        <item>三</item>
+        <item>四</item>
+        <item>五</item>
+        <item>六</item>
+    </string-array>
+    <!-- 日历控件月份 -->
+
+    <!--    服务器地址-->
+
+</resources>
