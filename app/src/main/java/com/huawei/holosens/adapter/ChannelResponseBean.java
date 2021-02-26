@@ -3,6 +3,11 @@ package com.huawei.holosens.adapter;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * 通道响应结果实体类
+ *
+ * @author CSV
+ */
 public class ChannelResponseBean extends BaseBean {
 
 

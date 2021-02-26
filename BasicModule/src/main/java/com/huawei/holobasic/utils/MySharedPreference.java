@@ -6,9 +6,7 @@ import android.content.SharedPreferences.Editor;
 
 /**
  *         注:如果不关心返回 SharedPreferences 的返回值，edit 之后，用 apply()，不要用 commit():
- *         http://stackoverflow
- *         .com/questions/5960678/whats-the-difference-between-commit-and
- *         -apply-in-shared-preference
+ *         http://stackoverflow.com/questions/5960678/whats-the-difference-between-commit-and-apply-in-shared-preference
  */
 
 public class MySharedPreference {

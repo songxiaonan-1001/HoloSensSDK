@@ -20,7 +20,7 @@ public class MySharedPreferenceKey {
         String PUSH_SOUND_SWITCH = "push_sound_switch";
         String PUSH_SHOCK_SWITCH = "push_shock_switch";
         String PUSH_SHOCK_LAST_TIME = "push_shock_last_time";
-        String PUSH_NOIFICATION_SWITCH="push_notifycation_switch"; //首页打开通知开关
+        String PUSH_NOIFICATION_SWITCH = "push_notifycation_switch"; //首页打开通知开关
     }
 
 
@@ -58,7 +58,7 @@ public class MySharedPreferenceKey {
 
     public static final String PTZ_CONTROL_TOKEN = "ptz_control_token";
 
-    public static class Account{
+    public static class Account {
         public static final String AccountInfo = "account_info";
     }
 
@@ -86,21 +86,22 @@ public class MySharedPreferenceKey {
      * 收藏通道
      */
     public static final String FAVOR_LIST = "FAVOR_LIST";
-    /***
+
+    /**
      * 通道相关
      */
     public static class LocalDevKey {
         public static final String DEV_LIST = "DEV_LIST";
     }
 
-    /***
+    /**
      * 通道相关
      */
     public static class LocalViewKey {
         public static final String LocalView = "LOCALVIEW_LIST";
     }
 
-    public static class GROUP{
+    public static class GROUP {
         public static final String GROUP_STATUS = "GROUP_STATUS";
         public static final String GROUP_USER_ROLE = "group_user_role";
     }

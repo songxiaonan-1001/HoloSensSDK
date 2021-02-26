@@ -16,11 +16,11 @@ public class PlayBean {
 
     /**
      * sdk使用
-     * @param type
-     * @param deviceId
-     * @param channelID
-     * @param nickname
-     * @param protool
+     * @param type 设备类型
+     * @param deviceId 设备ID
+     * @param channelID 通道ID
+     * @param nickname 设备名称
+     * @param protool 接入协议
      */
     public PlayBean(int type, String deviceId, String channelID, String nickname,String protool, int onlineStatus) {
         this.type = type;

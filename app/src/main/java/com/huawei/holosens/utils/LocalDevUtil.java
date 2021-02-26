@@ -39,8 +39,9 @@ public class LocalDevUtil {
         }
         List<LocalDev> list =  JSON.parseArray(str, LocalDev.class);
         for(LocalDev d : list){
-            if(d.getDeviceId().equals(devid) && d.getChannelId()==channelid)
+            if(d.getDeviceId().equals(devid) && d.getChannelId()==channelid) {
                 return true;
+            }
         }
         return false;
     }

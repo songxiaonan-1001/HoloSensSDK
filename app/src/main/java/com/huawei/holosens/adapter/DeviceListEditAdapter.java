@@ -30,15 +30,17 @@ public class DeviceListEditAdapter extends BaseQuickAdapter<DeviceResponseBean.D
         ImageView device_state = helper.getView(R.id.device_state);
         device_state.setVisibility(View.VISIBLE);
         if(TextUtils.equals(item.getDevice_state(),"ONLINE")){
-            if(item.getDevice_type().equals("NVR"))
+            if(item.getDevice_type().equals("NVR")) {
                 device_state.setImageResource(R.mipmap.ic_nvr_online);
-            else
+            } else {
                 device_state.setImageResource(R.mipmap.ic_device_online);
+            }
         }else {
-            if(item.getDevice_type().equals("NVR"))
+            if(item.getDevice_type().equals("NVR")) {
                 device_state.setImageResource(R.mipmap.icon_nvr_offline);
-            else
+            } else {
                 device_state.setImageResource(R.mipmap.ic_device_offline);
+            }
         }
 
 
@@ -51,8 +53,9 @@ public class DeviceListEditAdapter extends BaseQuickAdapter<DeviceResponseBean.D
        helper.itemView.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               if(listener!=null)
+               if(listener!=null) {
                    listener.onDeviceSelected(item);
+               }
            }
        });
     }

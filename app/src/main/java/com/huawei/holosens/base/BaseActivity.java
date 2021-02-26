@@ -49,6 +49,7 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+
 import pub.devrel.easypermissions.EasyPermissions;
 
 
@@ -80,16 +81,21 @@ public class BaseActivity extends FragmentActivity implements IHandlerLikeNotify
 
     protected int mScreenWidth, mScreenHeight, mNavBarHeight;
 
+    /**
+     * 屏幕 解锁/锁屏 监听对象
+     */
     public ScreenObserver mScreenObserver;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Handler利用WeakReference回收activity,从而避免内存泄漏
         mWeakReference = new WeakReference<>((Activity) this);
         mActivity = this;
+        //设置当前activity的引用
         ((BaseApplication) getApplication()).setCurrentNotifier(this);
-
+        //
         mScreenObserver = new ScreenObserver(this);
         mScreenObserver.requestScreenStateUpdate(new ScreenObserver.ScreenStateListener() {
             @Override
@@ -102,14 +108,15 @@ public class BaseActivity extends FragmentActivity implements IHandlerLikeNotify
             public void onScreenOff() {
                 Log.e("play_dis_resume_pause", "lockScreen-锁屏");
                 BaseActivity.this.handlerNotify.onHandler(SelfConsts.WHAT_ON_SCREEN_OFF, 0, 0, null);
-
             }
         });
 
         mLayoutInflater = LayoutInflater.from(this);
+        //将activity加入栈中
         ActivityManager.getInstance().push(mWeakReference);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //设置状态栏字体和颜色
             Window window = getWindow();
             StatusBarUtil.setLightStatusBarColor(this);
             window.setStatusBarColor(getResources().getColor(R.color.white));
@@ -118,13 +125,17 @@ public class BaseActivity extends FragmentActivity implements IHandlerLikeNotify
 //        if (this instanceof MainActivity) {
 //            /**首页的topbar，在布局中添加*/
 //        } else {
-            initSuperView();
+        initSuperView();
 //        }
 
+        //获取屏幕宽度(单位:像素)
         mScreenWidth = ScreenUtils.getScreenWidth();
+        //获取屏幕高度(单位:像素)
         mScreenHeight = ScreenUtils.getScreenHeight();
+        //获取虚拟按键的高度
         mNavBarHeight = NavigationBarTools.getNavigationBarHeight(this);
 
+        //注册EventBus
         EventBus.getDefault().register(this);
     }
 
@@ -137,13 +148,16 @@ public class BaseActivity extends FragmentActivity implements IHandlerLikeNotify
 
     @Override
     protected void onDestroy() {
+        //停止屏幕状态更新
         mScreenObserver.stopScreenStateUpdate();
-
+        //handler 删除任何挂起的回调和发送的消息(所有的回调函数和消息将被删除)
         handler.removeCallbacksAndMessages(null);
-        /* 将当前Activity从Activity管理栈中移除*/
-        if(mWeakReference!=null)
+        //将当前Activity从Activity管理栈中移除
+        if (mWeakReference != null) {
             ActivityManager.getInstance().pop(mWeakReference);
+        }
         super.onDestroy();
+        //注销EventBus
         EventBus.getDefault().unregister(this);
     }
 
@@ -210,10 +224,10 @@ public class BaseActivity extends FragmentActivity implements IHandlerLikeNotify
 //            /**首页的topbar，在布局中添加*/
 //            super.setContentView(layoutResID);
 //        } else {
-            View view = mLayoutInflater.inflate(layoutResID, null);
-            view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            mContentLayoutView.addView(view);
-            super.setContentView(mBaseLayoutView);
+        View view = mLayoutInflater.inflate(layoutResID, null);
+        view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        mContentLayoutView.addView(view);
+        super.setContentView(mBaseLayoutView);
 //        }
 
     }
@@ -228,11 +242,11 @@ public class BaseActivity extends FragmentActivity implements IHandlerLikeNotify
 //            /**首页的topbar，在布局中添加*/
 //            super.setContentView(view);
 //        } else {
-            view.setLayoutParams(new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT));
-            mContentLayoutView.addView(view);
-            super.setContentView(mBaseLayoutView);
+        view.setLayoutParams(new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+        mContentLayoutView.addView(view);
+        super.setContentView(mBaseLayoutView);
 //        }
     }
 
@@ -241,18 +255,14 @@ public class BaseActivity extends FragmentActivity implements IHandlerLikeNotify
      * # https://github.com/googlesamples/easypermissions
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[]
-            permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions,
-                grantResults);
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         // EasyPermissions handles the request result.
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions,
-                grantResults, this);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }
 
     @Override
     public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
-
     }
 
     @Override
@@ -293,16 +303,13 @@ public class BaseActivity extends FragmentActivity implements IHandlerLikeNotify
 
     /**
      * 当权限被拒绝以后所要做的事情
-     *
      */
     public void onWorksWhenPermissionsDenied() {
-
     }
 
     @SingleClick
     @Override
     public void onClick(View v) {
-
     }
 
     /**
@@ -411,23 +418,27 @@ public class BaseActivity extends FragmentActivity implements IHandlerLikeNotify
         return canSave;
     }
 
+    //----------------------------------------------
     /**
-     * 加载动画
+     * 加载动画 start
      */
+    //----------------------------------------------
+
     private LoadingDialog mLoading;
 
     /**
      * 显示
      */
-    protected void loading(boolean cancelable){
-        if(null != mLoading && mLoading.isShowing())
+    protected void loading(boolean cancelable) {
+        if (null != mLoading && mLoading.isShowing()) {
             return;
-        if(!isFinishing()){
-            if(null == mLoading) {
+        }
+        if (!isFinishing()) {
+            if (null == mLoading) {
                 mLoading = new LoadingDialog(this);
+                //设置对话框是否可取消
                 mLoading.setCancelable(cancelable);
             }
-
             mLoading.show();
         }
     }
@@ -436,15 +447,15 @@ public class BaseActivity extends FragmentActivity implements IHandlerLikeNotify
      * 显示
      */
     protected void loading(boolean cancelable, DialogInterface.OnShowListener showListener) {
-        if (null != mLoading && mLoading.isShowing())
+        if (null != mLoading && mLoading.isShowing()) {
             return;
+        }
         if (!isFinishing()) {
             if (null == mLoading) {
                 mLoading = new LoadingDialog(this);
                 mLoading.setCancelable(cancelable);
                 mLoading.setOnShowListener(showListener);
             }
-
             mLoading.show();
         }
     }
@@ -452,12 +463,18 @@ public class BaseActivity extends FragmentActivity implements IHandlerLikeNotify
     /**
      * 隐藏
      */
-    protected void dismissLoading(){
-        if(null != mLoading){
-            if(mLoading.isShowing())
+    protected void dismissLoading() {
+        if (null != mLoading) {
+            if (mLoading.isShowing()) {
                 mLoading.dismiss();
+            }
             mLoading = null;
         }
     }
 
+    //----------------------------------------------
+    /**
+     * 加载动画 end
+     */
+    //----------------------------------------------
 }

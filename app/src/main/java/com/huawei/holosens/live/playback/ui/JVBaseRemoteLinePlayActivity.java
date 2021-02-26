@@ -87,6 +87,7 @@ import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
+
 import rx.Single;
 import rx.SingleSubscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -833,7 +834,7 @@ public class JVBaseRemoteLinePlayActivity extends BaseActivity {
 //                if (connected) {
 //                    stopRemotePlay();
 //                } else {
-                    JniUtil.disConnect(connectIndex);
+                JniUtil.disConnect(connectIndex);
 //                }
             }
 
@@ -849,32 +850,35 @@ public class JVBaseRemoteLinePlayActivity extends BaseActivity {
 
     @Override
     public void onHandler(int what, int arg1, int arg2, Object obj) {
-        if (obj != null)
+        if (obj != null) {
             Log.e(TAG, "onHandler:  what:" + what + ",arg1=" + arg1 + ", arg2=" + arg2 + ", obj=" + obj.toString());
+        }
         switch (what) {
-            case NativeCbConsts.EVENT_TYPE_HPET_RECORDS_QUERY:
+            case NativeCbConsts.EVENT_TYPE_HPET_RECORDS_QUERY://录像查询
                 if (null != obj) {
                     HwRecordResult result = new Gson().fromJson(obj.toString(), HwRecordResult.class);
                     this.onNotify(WHAT_REMOTE_PRECISE_FILE_LIST, 0, 0, VodTs.transmitHwLocalRecord(result.getResult().getRecords(), currentDate));
                 }
                 break;
-            case NativeCbConsts.EVENT_TYPE_HPET_RECORD_DATES_QUERY:
+            case NativeCbConsts.EVENT_TYPE_HPET_RECORD_DATES_QUERY://录像日期列表查询
                 if (null != obj) {
                     HwRecordDateResult result = new Gson().fromJson(obj.toString(), HwRecordDateResult.class);
-                    if(null != result.getResult())
+                    if (null != result.getResult()) {
                         this.onNotify(WHAT_REMOTE_PRECISE_FILE_DATE_LIST, 0, 0, VodTs.transmitLocalRecordDate(result.getResult().getDates()));
+                    }
                 }
                 break;
-            case NativeCbConsts.EVENT_TYPE_HPET_PLAY_TIME_POS:
+            case NativeCbConsts.EVENT_TYPE_HPET_PLAY_TIME_POS://播放时间点(回放)
                 if (scrollTimeLineView.isManuScroll()) {
                     //手动滑动时不滚动时间轴
                     Log.e(TAG, "onHandler: what: rulerDefaultP不滚动");
                 } else {
                     String time = new Gson().fromJson(obj.toString(), SDKTimeStamp.class).getResult().getTime_pos();
-                    if(!isJvmpConn())
+                    if (!isJvmpConn()) {
                         sdkLocalTimeStimpToStringTime(time);
-                    else
+                    } else {
                         sdkTimeStimpToStringTime(time);
+                    }
                     Log.e(TAG, "onHandler:  what: rulerDefaultPos" + rulerDefaultPos);
                     runOnUiThread(new Runnable() {
                         @Override
@@ -903,14 +907,16 @@ public class JVBaseRemoteLinePlayActivity extends BaseActivity {
                     switch (arg2) {
                         // 1 -- 连接成功
                         case JVEncodedConst.CCONNECTTYPE_CONNOK:
-                            // 101 -- 连接成功
                         case JVEncodedConst.CCONNECTTYPE_CONNOK_NO_LIVE: {
+                            // 101 -- 连接成功(只连接不返回实时流)
                             if ((playBackType == PLAY_BACK_TYPE_LOCAL && connectType == 2) || playBackType == PLAY_BACK_TYPE_CLOUD) {
+                                //如果回放类型为本地并且设备连接类型为国标协议  或者   回放类型为云端
                                 Log.e("dongdz", "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
                                 return;
                             }
                             //好望
                             if (!AppFrontBackHelper.isAppOnForeground(mActivity)) {
+                                //如果应用不在前台,断开视频连接
 //                                FunctionUtil.disconnect(connectIndex);
                                 JniUtil.disConnect(connectIndex);
                                 connectIndex++;
@@ -1103,7 +1109,8 @@ public class JVBaseRemoteLinePlayActivity extends BaseActivity {
                         Log.e(TAG, getLocalClassName() + "--PFrame = " + obj.toString());
                         break;
                     }
-
+                    default:
+                        break;
                 }
                 break;
             }
@@ -1185,7 +1192,8 @@ public class JVBaseRemoteLinePlayActivity extends BaseActivity {
             case SelfConsts.WHAT_ON_SCREEN_ON:
                 Log.e(TAG, "onHandler:WHAT_ON_SCREEN_ON ");
                 break;
-
+            default:
+                break;
         }
 
     }
@@ -1627,7 +1635,6 @@ public class JVBaseRemoteLinePlayActivity extends BaseActivity {
                     break;
             }
         }
-
     };
 
     /**
@@ -1783,7 +1790,7 @@ public class JVBaseRemoteLinePlayActivity extends BaseActivity {
         Log.e(TAG, "playRemoteAtTime,scrollToTime=" + playTime);
         scrollTimeLineView.scrollToTime(playTime);
 
-        playHwRecord(currentDate+"T00:00:00.000+08:00");
+        playHwRecord(currentDate + "T00:00:00.000+08:00");
     }
 
     /**
@@ -1939,7 +1946,7 @@ public class JVBaseRemoteLinePlayActivity extends BaseActivity {
 //            connectChannel.getParent().setConnect_type(connectType);
 //            initSpeedData();
 ////            getRecordDataListFromNet();
-//            connect();
+//            JniUtil();
 //        }
 //    }
 
@@ -2221,7 +2228,7 @@ public class JVBaseRemoteLinePlayActivity extends BaseActivity {
         @Override
         public void onChanged(String mCurrentNum, boolean isAutoScrolling) {
             Log.e(TAG, "setNumberListener, mCurrentNum=" + mCurrentNum + ",tvNumber=" + selectTimeTV.getText().toString() + ",isAutoScrolling=" + isAutoScrolling);
-            if(!checkScrollAvalid(mCurrentNum)){
+            if (!checkScrollAvalid(mCurrentNum)) {
                 scrollTimeLineView.setManuScroll(false);
                 return;
             }
@@ -2270,19 +2277,18 @@ public class JVBaseRemoteLinePlayActivity extends BaseActivity {
     };
 
     /**
-     *
      * @return
      */
-    private boolean checkScrollAvalid(String time){
+    private boolean checkScrollAvalid(String time) {
         SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");//设置日期格式
-        for(String[] times : timeList){
+        for (String[] times : timeList) {
             String begin = times[0];
             String end = times[1];
             try {
                 Date beginD = df.parse(begin);
                 Date endD = df.parse(end);
                 Date selectT = df.parse(time);
-                if(selectT.getTime()>=beginD.getTime() && selectT.getTime()<=endD.getTime()){
+                if (selectT.getTime() >= beginD.getTime() && selectT.getTime() <= endD.getTime()) {
                     return true;
                 }
             } catch (ParseException e) {
@@ -2292,6 +2298,7 @@ public class JVBaseRemoteLinePlayActivity extends BaseActivity {
         }
         return false;
     }
+
     /**
      * 拼接时间标签上的
      *
@@ -2370,7 +2377,7 @@ public class JVBaseRemoteLinePlayActivity extends BaseActivity {
                 }
             }
         }
-//        Log.e(TAG, getLocalClassName() + "--最终index=" + index);
+        //Log.e(TAG, getLocalClassName() + "--最终index=" + index);
         return index;
     }
 
@@ -2383,13 +2390,15 @@ public class JVBaseRemoteLinePlayActivity extends BaseActivity {
         clearAllRecordsInfo();
 
         if (playBackType == PLAY_BACK_TYPE_LOCAL) {
-            if (connectType == ProtocolType.GB28181)
+            if (connectType == ProtocolType.GB28181) {
                 BG28181RecordList(false);       //国标 前端录像
-            else
+            } else {
                 HWRecordList();                   //好望设备 前端录像
+            }
 
-        } else
+        } else {
             BG28181RecordList(true);            //云端录像
+        }
 
     }
 
@@ -2403,7 +2412,7 @@ public class JVBaseRemoteLinePlayActivity extends BaseActivity {
         mTimeLand.setText(rulerDefaultPos);
 
         dismissLoading();
-        playHwRecord(currentDate+"T00:00:00.000+08:00");        //播放
+        playHwRecord(currentDate + "T00:00:00.000+08:00");        //播放
         searchHoloRecord();                                         //获取好望录像文件列表
         searchHoloRecordDate();
     }
@@ -2543,20 +2552,22 @@ public class JVBaseRemoteLinePlayActivity extends BaseActivity {
 //        int limit = 1000;
 //        int offset = 0;
         String type;
-        if(cloud)
+        if (cloud) {
             type = "NORMAL_RECORD";
-        else
+        } else {
             type = "SECONDARY_STREAM_1";
+        }
 
         String url;
-        if (cloud)
+        if (cloud) {
             url = Consts.GET_CLOUD_RECORDS;
-        else
+        } else {
             url = Consts.GET_LOCAL_RECORDS;
+        }
         url = url.replace("{user_id}", Consts.userId)
                 .replace("{device_id}", connectChannel.getParent().getSn())
                 .replace("{channel_id}", connectChannel.getChannel_id());
-        AppImpl.getInstance(mActivity).getGB28181RecordList(url, MySharedPreference.getString(MySharedPreferenceKey.LoginKey.TOKEN), start_time, end_time, pageSize, page, type,cloud, listener);
+        AppImpl.getInstance(mActivity).getGB28181RecordList(url, MySharedPreference.getString(MySharedPreferenceKey.LoginKey.TOKEN), start_time, end_time, pageSize, page, type, cloud, listener);
     }
 
     /**
@@ -2631,10 +2642,11 @@ public class JVBaseRemoteLinePlayActivity extends BaseActivity {
             }
         };
         String url;
-        if (cloud)
+        if (cloud) {
             url = Consts.GET_CLOUD_VOD_URL;
-        else
+        } else {
             url = Consts.GET_LOCAL_VOD_URL;
+        }
         url = url.replace("{user_id}", Consts.userId);
         url = url.replace("{device_id}", connectChannel.getParent().getSn());
         url = url.replace("{channel_id}", connectChannel.getChannel_id());
@@ -2695,7 +2707,7 @@ public class JVBaseRemoteLinePlayActivity extends BaseActivity {
                     connectChannel.setJvmpUrl(result);
                 }
 
-                JniUtil.holosensPlayerQueryRecordsByP2p(connectChannel.getJvmpUrl(), Integer.parseInt(connectGbCHannelId), 1, currentDate+"T00:00:00.000+08:00", currentDate+"T23:59:00.000+08:00");
+                JniUtil.holosensPlayerQueryRecordsByP2p(connectChannel.getJvmpUrl(), Integer.parseInt(connectGbCHannelId), 1, currentDate + "T00:00:00.000+08:00", currentDate + "T23:59:00.000+08:00");
             }
 
             @Override
@@ -2740,7 +2752,7 @@ public class JVBaseRemoteLinePlayActivity extends BaseActivity {
                 }
 
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                JniUtil.holosensPlayerQueryRecordDates(connectChannel.getJvmpUrl(), Integer.parseInt(connectGbCHannelId), 1, simpleDateFormat.format(DateUtil.getFirstDayOfMonth(year, month-1)), simpleDateFormat.format(DateUtil.getLastDayOfMonth(year, month-1)));
+                JniUtil.holosensPlayerQueryRecordDates(connectChannel.getJvmpUrl(), Integer.parseInt(connectGbCHannelId), 1, simpleDateFormat.format(DateUtil.getFirstDayOfMonth(year, month - 1)), simpleDateFormat.format(DateUtil.getLastDayOfMonth(year, month - 1)));
             }
 
             @Override
@@ -2807,5 +2819,4 @@ public class JVBaseRemoteLinePlayActivity extends BaseActivity {
         String url = Consts.HOLO_PLAYURL.replace("{user_id}", Consts.userId);
         AppImpl.getInstance(mActivity).getDataByPostMethod(url, MySharedPreference.getString(MySharedPreferenceKey.LoginKey.TOKEN), params, listener);
     }
-
 }

@@ -55,6 +55,7 @@ public class DeviceListFragment extends BaseFragment {
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new DeviceListAdapter(R.layout.item_device_list, deviceLists);
+
         mGetToken = view.findViewById(R.id.get_token);
         mGetToken.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +63,7 @@ public class DeviceListFragment extends BaseFragment {
                 loadToken();
             }
         });
+
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override

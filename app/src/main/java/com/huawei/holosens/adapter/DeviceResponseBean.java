@@ -3,6 +3,11 @@ package com.huawei.holosens.adapter;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * 设备响应结果实体类
+ *
+ * @author CSV
+ */
 public class DeviceResponseBean extends BaseBean implements Serializable {
 
 
@@ -30,7 +35,7 @@ public class DeviceResponseBean extends BaseBean implements Serializable {
         this.devices = devices;
     }
 
-    public static class DevicesBean implements Serializable{
+    public static class DevicesBean implements Serializable {
         /**
          * device_id : 2198061248WLL3000028
          * device_name : 展厅NVR800

@@ -5,11 +5,13 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.huawei.net.R;
 import com.huawei.net.retrofit.cookie.CookieJarImpl;
 import com.huawei.net.retrofit.cookie.store.PersistentCookieStore;
 import com.huawei.net.retrofit.factory.ConverterFactoryPro;
 import com.huawei.net.retrofit.factory.StringConverterFactory;
 
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.security.KeyStore;
 import java.security.SecureRandom;

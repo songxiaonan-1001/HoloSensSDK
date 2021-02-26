@@ -44,8 +44,9 @@ public abstract class BaseFragment extends Fragment implements
     public void onDestroy() {
         super.onDestroy();
         // 将当前Fragment作为接收服务器回调(onNotify/onHandler)的对象
-        if(mWeakReference!=null)
+        if (mWeakReference != null) {
             ActivityManager.getInstance().pop(mWeakReference);
+        }
     }
 
     /**
@@ -64,8 +65,7 @@ public abstract class BaseFragment extends Fragment implements
             super.handleMessage(msg);
             BaseFragment mFragment;
             if ((mFragment = mWeakReference.get()) != null) {
-                mFragment.handlerNotify.onHandler(msg.what, msg.arg1, msg.arg2,
-                        msg.obj);
+                mFragment.handlerNotify.onHandler(msg.what, msg.arg1, msg.arg2, msg.obj);
             }
         }
     }
@@ -99,7 +99,7 @@ public abstract class BaseFragment extends Fragment implements
 //    }
 
     /**
-     *服务器回调
+     * 服务器回调
      */
     @Override
     public void onNotify(int what, int arg1, int arg2, Object obj) {

@@ -6,6 +6,11 @@ import com.huawei.holosens.live.play.bean.Glass;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+
+/**
+ * 抽象类:
+ * @author CSV
+ */
 public abstract class BaseGlass extends RecyclerView.ViewHolder {
 
     public BaseGlass(View itemView) {

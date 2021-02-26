@@ -31,8 +31,10 @@ public class DeviceListActivity extends BaseActivity {
             StatusBarUtil.setLightStatusBarColor(this);
             window.setStatusBarColor(getResources().getColor(R.color.bg_settings));
         }
+
         TopBarLayout topBarLayout = getTopBarView();
         topBarLayout.setTitle("设备列表");
+
         Fragment dev_fragment = new DeviceListFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, dev_fragment).commit();
     }

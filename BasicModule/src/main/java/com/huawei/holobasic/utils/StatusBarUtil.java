@@ -11,6 +11,9 @@ import android.view.WindowManager;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+/**
+ * 状态栏工具类
+ */
 public class StatusBarUtil {
     /**
      * 修改状态栏为全透明
@@ -45,9 +48,7 @@ public class StatusBarUtil {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = activity.getWindow();
             window.setStatusBarColor(activity.getResources().getColor(colorId));
-        } else
-
-        {
+        } else {
             //使用SystemBarTint库使4.4版本状态栏变色，需要先将状态栏设置为透明
             transparencyBar(activity);
             SystemBarTintManager tintManager = new SystemBarTintManager(activity);
@@ -192,6 +193,7 @@ public class StatusBarUtil {
 
     /**
      * 黑色字体状态栏
+     *
      * @param activity
      */
     public static void setLightStatusBarColor(Activity activity) {
@@ -204,6 +206,7 @@ public class StatusBarUtil {
 
     /**
      * 白色字体状态栏
+     *
      * @param activity
      */
     public static void setWhiteStatusBarColor(Activity activity) {

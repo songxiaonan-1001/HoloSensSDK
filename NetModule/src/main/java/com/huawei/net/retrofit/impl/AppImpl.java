@@ -132,8 +132,9 @@ public class AppImpl {
             //转换为json字符串
             String jsonParam = new Gson().toJson(params);
             RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonParam);
-            if (DebugUtil.isApkInDebug(context))
+            if (DebugUtil.isApkInDebug(context)) {
                 Log.e("jsonParam>>>>>>>>>>>", body.toString() + "=====" + jsonParam);
+            }
 
             //Rx被观测者
             Observable<String> observable = appService.loadData(url, body);
@@ -390,8 +391,9 @@ public class AppImpl {
                                                 .flatMap(new Func1<String, Observable<ResponseData<T>>>() {
                                                     @Override
                                                     public Observable<ResponseData<T>> call(String strResponse) {
-                                                        if (DebugUtil.isApkInDebug(context))
+                                                        if (DebugUtil.isApkInDebug(context)) {
                                                             Log.e("strResponse>>>>>>>>>>>", strResponse);
+                                                        }
                                                         //创建对象,承载数据.
                                                         ResponseData<T> resultResponseData = new ResponseData();
                                                         //解密返回结果
@@ -411,8 +413,9 @@ public class AppImpl {
                                                                         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
                                                                         String jsonParam = gson.toJson(params);
                                                                         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonParam);
-                                                                        if (DebugUtil.isApkInDebug(context))
+                                                                        if (DebugUtil.isApkInDebug(context)) {
                                                                             Log.e("jsonParam>>>>>>>>>>>", body.toString() + "=====" + jsonParam);
+                                                                        }
                                                                         String Authorization = "Bearer " + MySharedPreference.getString(MySharedPreferenceKey.LoginKey.TOKEN);
                                                                         //Rx被观测者
                                                                         final Observable<String> observable = appService.loadData(url, Authorization, body);
@@ -631,8 +634,9 @@ public class AppImpl {
         int tokenExpiresTime = MySharedPreference.getInt(MySharedPreferenceKey.LoginKey.TOKEN_EXPIRES_TIME, 0);
 
         long time = System.currentTimeMillis() - tokenTime;
-        if (time < (tokenExpiresTime == 0 ? 5 * 60 * 1000 : tokenExpiresTime * 1000))
+        if (time < (tokenExpiresTime == 0 ? 5 * 60 * 1000 : tokenExpiresTime * 1000)) {
             return false;
+        }
         return true;
     }
 
@@ -705,6 +709,12 @@ public class AppImpl {
 
     }
 
+    /**
+     * 获取Token
+     * @param url
+     * @param params 请求体参数(获取token要用到的ak和sk)
+     * @param listener
+     */
     public void getTokenByPostMethod(String url, HashMap<String, Object> params, final ResponseListener listener) {
 
         Gson gson = new GsonBuilder().disableHtmlEscaping().create();
@@ -719,6 +729,7 @@ public class AppImpl {
 
                 Log.i(TAG, "post token result:" + response.body() + " code:" + response.code() + " message:" + response.message());
                 if (response.code() == 200) {
+                    //response.body()即为请求到的数据(里面含token信息)
                     listener.onSuccess(response.body());
                 } else {
                     listener.onSuccess(null);
@@ -753,10 +764,11 @@ public class AppImpl {
         map.put("end_time", end);
         map.put("offset", String.valueOf(offset));
         map.put("limit", String.valueOf(limit));
-        if (cloud)
+        if (cloud) {
             map.put("record_type", type);
-        else
+        } else {
             map.put("stream_type", type);
+        }
 
         Call<String> call = appService.GetData(url, token, map);
         call.enqueue(new Callback<String>() {

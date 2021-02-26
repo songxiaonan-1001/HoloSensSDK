@@ -10,14 +10,13 @@ import java.util.List;
 
 /**
  * 应用前后台状态监听帮助类，仅在Application中使用
+ *
+ * @author CSV
  */
 public class AppFrontBackHelper {
-
     private OnAppStatusListener mOnAppStatusListener;
 
-
     public AppFrontBackHelper() {
-
     }
 
     /**
@@ -35,6 +34,9 @@ public class AppFrontBackHelper {
         application.unregisterActivityLifecycleCallbacks(activityLifecycleCallbacks);
     }
 
+    /**
+     * 统一管理activity的生命周期
+     */
     private Application.ActivityLifecycleCallbacks activityLifecycleCallbacks = new Application.ActivityLifecycleCallbacks() {
         //打开的Activity数量统计
         private int activityStartCount = 0;
@@ -89,9 +91,18 @@ public class AppFrontBackHelper {
         }
     };
 
+    /**
+     * 接口:app状态监听
+     */
     public interface OnAppStatusListener {
+        /**
+         * 前台
+         */
         void onFront();
 
+        /**
+         * 后台
+         */
         void onBack();
     }
 
@@ -102,12 +113,11 @@ public class AppFrontBackHelper {
      * @return
      */
     public static boolean isAppOnForeground(Context mContext) {
-        ActivityManager myAM = (ActivityManager) mContext
-                .getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningAppProcessInfo> appProcesses = myAM
-                .getRunningAppProcesses();
-        if (appProcesses == null)
+        ActivityManager myAM = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> appProcesses = myAM.getRunningAppProcesses();
+        if (appProcesses == null) {
             return false;
+        }
 
         for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
             // The name of the process that this object is associated with.

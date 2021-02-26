@@ -34,7 +34,6 @@ public class JniUtil {
         return initRes;
     }
 
-
     /**
      * 播放库释放
      * @return
@@ -44,8 +43,6 @@ public class JniUtil {
         Log.e(TAG,"function=holosensPlayerRelease");
     }
 
-
-
     /**
      * 连接方法
      * @param window
@@ -54,7 +51,6 @@ public class JniUtil {
      */
     public static boolean connect(int window, String url) {
         int playerId = Jni.holosensPlayerConnect(url,0,0);
-
         Log.e(TAG, "function=connect:playerId=" + playerId + ", jvmp=" + url);
         if (playerId > 0) {
             BaseApplication.getInstance().playerIdWindowMap.put(playerId, window);
@@ -62,7 +58,6 @@ public class JniUtil {
             return true;
         }
         return false;
-
     }
 
     /**
@@ -70,7 +65,9 @@ public class JniUtil {
      * @param window
      */
     public static void disConnect(int window){
-        if (!windowPlayerIdMap.containsKey(window)) return;
+        if (!windowPlayerIdMap.containsKey(window)) {
+            return;
+        }
         int playerId = windowPlayerIdMap.get(window);
         Jni.holosensPlayerDisconnect(playerId);
         windowPlayerIdMap.remove(window);
@@ -83,12 +80,13 @@ public class JniUtil {
      * @param mSurfaceHolder
      */
     public static void show(int window, SurfaceHolder mSurfaceHolder){
-        if (!windowPlayerIdMap.containsKey(window)) return;
+        if (!windowPlayerIdMap.containsKey(window)) {
+            return;
+        }
         int playerId = windowPlayerIdMap.get(window);
         Jni.holosensPlayerShow(playerId, mSurfaceHolder.getSurface(), 0, 0, mSurfaceHolder.getSurfaceFrame().width(), mSurfaceHolder.getSurfaceFrame().height());
         Log.e(TAG, "function=holosensPlayerShow:playerId=" + playerId+";width="+mSurfaceHolder.getSurfaceFrame().width()+";height="+mSurfaceHolder.getSurfaceFrame().height());
     }
-
 
     /**
      * @brief 日志配置
@@ -100,7 +98,6 @@ public class JniUtil {
         Jni.holosensPlayerLogConfig(log_path,log_level);
         Log.e(TAG,"function=holosensPlayerLogConfig:log_path="+log_path+";log_level="+log_level);
     }
-
 
     /**
      * @brief 建立octc连接
@@ -120,6 +117,7 @@ public class JniUtil {
         Log.e(TAG,"function=holosensPlayerConnectByP2p:p2p_info="+p2p_info+";window="+window+";stream_index="+stream_index);
         return playerId;
     }
+
     /**
      * @brief 录像查询
      * @param p2p_info p2p连接所需的信息，设备id，mts列表
@@ -147,6 +145,7 @@ public class JniUtil {
         Log.e(TAG,"function=holosensPlayerQueryRecordDates:p2p_info"+p2p_info+";channel_index="+channel_index+";begin_time="+begin_time+";end_time="+end_time+";result="+result);
         return result;
     }
+
     /**
      * @brief 录像回放
      * @param p2p_info p2p连接所需的信息，设备id，mts列表
@@ -164,73 +163,92 @@ public class JniUtil {
         }
         return playerId;
     }
+
     /**
      * @brief 打开声音
      * @param window 窗口，转换成播放器id
      * @return 无
      */
     public static void holosensPlayerOpenSound(int window){
-        if (!windowPlayerIdMap.containsKey(window)) return;
+        if (!windowPlayerIdMap.containsKey(window)) {
+            return;
+        }
         int playerId = windowPlayerIdMap.get(window);
         Jni.holosensPlayerMute(playerId,1);
         Log.e(TAG,"function=holosensPlayerOpenSound:playerId="+playerId+";window="+window);
     }
+
     /**
      * @brief 关闭声音
      * @param window 窗口，转换成播放器id
      * @return 无
      */
     public static void holosensPlayerCloseSound(int window){
-        if (!windowPlayerIdMap.containsKey(window)) return;
+        if (!windowPlayerIdMap.containsKey(window)) {
+            return;
+        }
         int playerId = windowPlayerIdMap.get(window);
         Jni.holosensPlayerMute(playerId,0);
         Log.e(TAG,"function=holosensPlayerCloseSound:playerId="+playerId+";window="+window);
     }
+
     /**
      * @brief 请求I帧，直播模式下使用
      * @param window 窗口，转换成播放器id
      * @return 0-成功, 失败-1
      */
     public static int holosensPlayerRequestIFrame(int window){
-        if (!windowPlayerIdMap.containsKey(window)) return -1;
+        if (!windowPlayerIdMap.containsKey(window)) {
+            return -1;
+        }
         int playerId = windowPlayerIdMap.get(window);
         int result = Jni.holosensPlayerRequestIFrame(playerId);
         Log.e(TAG,"function=holosensPlayerRequestIFrame:playerId="+playerId+";window="+window+";result="+result);
         return result;
     }
+
     /**
      * @brief 暂停
      * @param window 窗口，转换成播放器id
      * @return 无
      */
     public static void holosensPlayerPause(int window){
-        if (!windowPlayerIdMap.containsKey(window)) return;
+        if (!windowPlayerIdMap.containsKey(window)) {
+            return;
+        }
         int playerId = windowPlayerIdMap.get(window);
         Jni.holosensPlayerPause(playerId);
         Log.e(TAG,"function=holosensPlayerPause:playerId="+playerId+";window="+window);
     }
+
     /**
      * @brief 恢复
      * @param window 窗口，转换成播放器id
      * @return 无
      */
     public static void holosensPlayerResume(int window){
-        if (!windowPlayerIdMap.containsKey(window)) return;
+        if (!windowPlayerIdMap.containsKey(window)) {
+            return;
+        }
         int playerId = windowPlayerIdMap.get(window);
         Jni.holosensPlayerResume(playerId);
         Log.e(TAG,"function=holosensPlayerResume:playerId="+playerId+";window="+window);
     }
+
     /**
      * @brief 单帧
      * @param window 窗口，转换成播放器id
      * @return 无
      */
     public static void holosensPlayerStep(int window){
-        if (!windowPlayerIdMap.containsKey(window)) return;
+        if (!windowPlayerIdMap.containsKey(window)) {
+            return;
+        }
         int playerId = windowPlayerIdMap.get(window);
         Jni.holosensPlayerStep(playerId);
         Log.e(TAG,"function=holosensPlayerStep:playerId="+playerId+";window="+window);
     }
+
     /**
      * @brief 倍速
      * @param window 窗口，转换成播放器id
@@ -238,11 +256,14 @@ public class JniUtil {
      * @return 无
      */
     public static void holosensPlayerSetSpeed(int window, int speed){
-        if (!windowPlayerIdMap.containsKey(window)) return;
+        if (!windowPlayerIdMap.containsKey(window)) {
+            return;
+        }
         int playerId = windowPlayerIdMap.get(window);
         Jni.holosensPlayerSetSpeed(playerId,speed);
         Log.e(TAG,"function=holosensPlayerSetSpeed:playerId="+playerId+";window="+window+";speed="+speed);
     }
+
     /**
      * @brief 跳转
      * @param window 窗口，转换成播放器id
@@ -250,12 +271,13 @@ public class JniUtil {
      * @return 无
      */
     public static void holosensPlayerSkip(int window, String time_pos){
-        if (!windowPlayerIdMap.containsKey(window)) return;
+        if (!windowPlayerIdMap.containsKey(window)) {
+            return;
+        }
         int playerId = windowPlayerIdMap.get(window);
         Jni.holosensPlayerSkip(playerId,time_pos);
         Log.e(TAG,"function=holosensPlayerSetSpeed:playerId="+playerId+";window="+window+";time_pos="+time_pos);
     }
-
 
     /**
      * 抓拍
@@ -264,7 +286,6 @@ public class JniUtil {
      * @return
      */
     public static String captureWithDev(int window, String devid) {
-
         String capturePath = AppConsts.CAPTURE_PATH + DateUtil.getCurrentDateSimple()
                 + File.separator+devid.replace(File.separator, "")+ File.separator;
         String fileName = DateFormat.format(JVSetParamConst.FORMATTER_TIME,
@@ -272,7 +293,9 @@ public class JniUtil {
                 + AppConsts.IMAGE_JPG_KIND;
         FileUtil.createDirectory(capturePath);
 
-        if (!windowPlayerIdMap.containsKey(window)) return "";
+        if (!windowPlayerIdMap.containsKey(window)) {
+            return "";
+        }
         int playerId = windowPlayerIdMap.get(window);
         Jni.holosensPlayerSnapshot(playerId, 0, capturePath +fileName);
         return capturePath +fileName;
@@ -291,7 +314,9 @@ public class JniUtil {
 
         FileUtil.createDirectory(videoPath);
 
-        if (!windowPlayerIdMap.containsKey(window)) return "";
+        if (!windowPlayerIdMap.containsKey(window)) {
+            return "";
+        }
         int playerId = windowPlayerIdMap.get(window);
         Jni.holosensPlayerRecordStart(playerId, 0, videoPath ,fileName);
         return videoPath +fileName;
@@ -303,7 +328,9 @@ public class JniUtil {
      * @return
      */
     public static void stopRecord(int window) {
-        if (!windowPlayerIdMap.containsKey(window)) return ;
+        if (!windowPlayerIdMap.containsKey(window)) {
+            return ;
+        }
         int playerId = windowPlayerIdMap.get(window);
         Jni.holosensPlayerRecordStop(playerId);
     }

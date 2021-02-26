@@ -1,10 +1,13 @@
 package com.huawei.holosens.bean;
 
 
-
 import java.io.Serializable;
 
-public class LocalChannel implements Serializable{
+/**
+ * 本地通道
+ * @author CSV
+ */
+public class LocalChannel implements Serializable {
     public LocalChannel() {
     }
 
@@ -26,9 +29,9 @@ public class LocalChannel implements Serializable{
     private String id;
     private String date;
     private String name;
-    private boolean top;        //是否置顶
+    private boolean top;      //是否置顶
     private long topTime;     //置顶时间      排序用到
-    private long permission;    //权限
+    private long permission;  //权限
 
     public String getId() {
         return id;
@@ -113,7 +116,9 @@ public class LocalChannel implements Serializable{
     }
 
 
-    /**是否在线**/
+    /**
+     * 是否在线
+     **/
     private int isOnline;
 
     public int isOnline() {

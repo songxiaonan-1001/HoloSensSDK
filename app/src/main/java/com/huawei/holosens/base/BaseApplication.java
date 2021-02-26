@@ -64,13 +64,14 @@ public class BaseApplication extends Application {
 
 
     private void initALL() {
-        MySharedPreference.init(this);
-        ScreenUtils.init(this);
-        ErrorUtil.getInstance().setmContext(this);
-        initBugly();
+        MySharedPreference.init(this);//初始化SharedPreference
+        ScreenUtils.init(this);//初始化像素转换
+        ErrorUtil.getInstance().setmContext(this);//初始化错误码工具类
+        initBugly();//初始化bugly
         initMediaIgnore();
 
 
+        //应用前后台状态监听
         mAppHelper = new AppFrontBackHelper();
         mAppHelper.register(this, new AppFrontBackHelper.OnAppStatusListener() {
             @Override
@@ -78,6 +79,7 @@ public class BaseApplication extends Application {
                 //应用切到前台处理
                 //刷新消息未读数量
                 MsgEvent event = new MsgEvent();
+                //更新未读消息数量
                 event.setMsgTag(MsgEvent.MSG_EVENT_UPDATE_UNREAD_COUNT);
                 JSONObject item = new JSONObject();
                 try {
@@ -86,6 +88,7 @@ public class BaseApplication extends Application {
                     e.printStackTrace();
                 }
                 event.setAttachment(item.toString());
+                //eventbus发送消息
                 EventBus.getDefault().post(event);
             }
 
@@ -102,7 +105,7 @@ public class BaseApplication extends Application {
 //            MySharedPreference.putBoolean(MySharedPreferenceKey.SAFE_SETTING,true);
 //        if(MySharedPreference.getBoolean(MySharedPreferenceKey.SAFE_SETTING)) {
 //            Log.e(TAG, "open bugly");
-            CrashReport.initCrashReport(getApplicationContext(), "e7b09dc3d8", true);
+        CrashReport.initCrashReport(getApplicationContext(), "e7b09dc3d8", true);
 //        }
 //        AGConnectCrash.getInstance().enableCrashCollection(true);
     }
@@ -144,8 +147,12 @@ public class BaseApplication extends Application {
     };
 
     @Override
+    /***
+     * 结束(只有在模拟器环境下,应用退出才执行该方法)
+     */
     public void onTerminate() {
         super.onTerminate();
+        //应用前后台监听解除注册
         mAppHelper.unRegister(this);
     }
 
@@ -178,12 +185,6 @@ public class BaseApplication extends Application {
      * 新播放库
      */
 
-    /**
-     * 修改当前显示的 Activity 引用
-     *
-     * @param currentNotify
-     */
-
 
     public HashMap<Integer, Integer> playerIdWindowMap = new HashMap<Integer, Integer>();//
 
@@ -203,33 +204,34 @@ public class BaseApplication extends Application {
      * @param event_state
      * @param json_data
      */
-    void OnEvent(int player_id, int event_type, int event_state, String json_data){
+    void OnEvent(int player_id, int event_type, int event_state, String json_data) {
 
-        Log.e(TAG,"OnEvent-player_id="+player_id+";event_type="+event_type+";event_state="+event_state+";json_data="+json_data);
+        Log.e(TAG, "OnEvent-player_id=" + player_id + ";event_type=" + event_type + ";event_state=" + event_state + ";json_data=" + json_data);
 
-        switch (event_type){
+        switch (event_type) {
             case NativeCbConsts.EVENT_TYPE_HPET_PLAY:
-            case NativeCbConsts.EVENT_TYPE_HPET_PLAY_TIME_POS:{
-                int window=-1;
-                if(null != playerIdWindowMap && playerIdWindowMap.size()>0) {
+            case NativeCbConsts.EVENT_TYPE_HPET_PLAY_TIME_POS: {
+                int window = -1;
+                if (null != playerIdWindowMap && playerIdWindowMap.size() > 0) {
                     try {
                         window = playerIdWindowMap.get(player_id);
                     } catch (Exception e) {
                         window = -1;
                         e.printStackTrace();
                     }
-                    if(window == -1)
+                    if (window == -1) {
                         return;
+                    }
                 }
+
                 if (null != getCurrentNotifier()) {
-                    Log.e(TAG, "window =="+window);
-                    NativeCbTs.transmit(getCurrentNotifier(),event_type, window, event_state, json_data);
+                    Log.e(TAG, "window ==" + window);
+                    NativeCbTs.transmit(getCurrentNotifier(), event_type, window, event_state, json_data);
                 } else {
                     Log.e(TAG, "currentNotify is null!");
                 }
             }
             break;
-
             default:
                 getCurrentNotifier().onNotify(event_type, player_id, event_state, json_data);
                 break;

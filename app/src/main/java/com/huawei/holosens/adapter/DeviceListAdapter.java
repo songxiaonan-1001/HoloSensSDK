@@ -13,38 +13,45 @@ import java.util.List;
 
 import androidx.annotation.Nullable;
 
+/**
+ * 设备列表适配器
+ *
+ * @author CSV
+ */
 public class DeviceListAdapter extends BaseQuickAdapter<DeviceResponseBean.DevicesBean, BaseViewHolder> {
 
 
     public DeviceListAdapter(int layoutResId, @Nullable List<DeviceResponseBean.DevicesBean> data) {
         super(layoutResId, data);
-       /* item_device_list*/
+        /* item_device_list*/
     }
 
     @Override
     protected void convert(BaseViewHolder helper, DeviceResponseBean.DevicesBean item) {
 
-       TextView tv_device_name =  helper.getView(R.id.tv_device_name);
-       String deviceName = item.getDevice_name();
+        TextView tv_device_name = helper.getView(R.id.tv_device_name);
+        String deviceName = item.getDevice_name();
 
         ImageView device_state = helper.getView(R.id.device_state);
         device_state.setVisibility(View.VISIBLE);
-        if(TextUtils.equals(item.getDevice_state(),"ONLINE")){
-            if(item.getDevice_type().equals("NVR"))
+        if (TextUtils.equals(item.getDevice_state(), "ONLINE")) {
+            if (item.getDevice_type().equals("NVR")) {
                 device_state.setImageResource(R.mipmap.ic_nvr_online);
-            else
+            } else {
                 device_state.setImageResource(R.mipmap.ic_device_online);
-        }else {
-            if(item.getDevice_type().equals("NVR"))
-            device_state.setImageResource(R.mipmap.icon_nvr_offline);
-        else
-            device_state.setImageResource(R.mipmap.ic_device_offline);
+            }
+        } else {
+            if (item.getDevice_type().equals("NVR")) {
+                device_state.setImageResource(R.mipmap.icon_nvr_offline);
+            } else {
+                device_state.setImageResource(R.mipmap.ic_device_offline);
+            }
         }
 
-       if(!TextUtils.isEmpty(deviceName)){
-           tv_device_name.setText(item.getDevice_name());
-       }else {
-           tv_device_name.setText(item.getDevice_id());
-       }
+        if (!TextUtils.isEmpty(deviceName)) {
+            tv_device_name.setText(item.getDevice_name());
+        } else {
+            tv_device_name.setText(item.getDevice_id());
+        }
     }
 }

@@ -20,6 +20,7 @@ import com.huawei.holosens.bean.Channel;
 import com.huawei.holosens.bean.Device;
 import com.huawei.holosens.bean.LiveUrlBean;
 import com.huawei.holosens.bean.ProtocolType;
+import com.huawei.holosens.consts.JVEncodedConst;
 import com.huawei.holosens.consts.JVOctConst;
 import com.huawei.holosens.live.play.bean.Glass;
 import com.huawei.holosens.live.play.event.MsgEvent;
@@ -44,7 +45,6 @@ import java.util.HashMap;
 
 /**
  * 云视通协议2.0
- *
  */
 public class C2PlayHelper extends BasePlayHelper {
 
@@ -163,9 +163,9 @@ public class C2PlayHelper extends BasePlayHelper {
         mPlayState = STARTED;
         mGlass.setManualDisconnect(false);
         mStateChangeListener.onUpdate(prepare, 0);
-        if(mChannel.getOnlineStatus() == 0){        //离线
+        if (mChannel.getOnlineStatus() == 0) {        //离线
             mStateChangeListener.onUpdate(connectFailed, mConnectStateArray[27]);
-        }else {
+        } else {
             getPlayInfo();
         }
     }
@@ -207,7 +207,7 @@ public class C2PlayHelper extends BasePlayHelper {
                             mStateChangeListener.onUpdate(connecting, 0);
                             Log.e(TAG, "connect#start" + mActivity.isFinishing() + ", " + isCancelled());
 
-                            result = JniUtil.holosensPlayerConnectByP2p(mChannel.getJvmpUrl(), mGlass.getNo(), mChannel.getStreamTag()==JVOctConst.STREAM_SD?1:0, mChannel.getChannelType() == ProtocolType.HOLO?Integer.parseInt(mChannel.getChannel_id()):0);
+                            result = JniUtil.holosensPlayerConnectByP2p(mChannel.getJvmpUrl(), mGlass.getNo(), mChannel.getStreamTag() == JVOctConst.STREAM_SD ? 1 : 0, mChannel.getChannelType() == ProtocolType.HOLO ? Integer.parseInt(mChannel.getChannel_id()) : 0);
 
                             Log.e(TAG, "connect#end" + mActivity.isFinishing() + ", " + isCancelled());
                             if (!mActivity.isFinishing() && !isCancelled()) {
@@ -261,7 +261,7 @@ public class C2PlayHelper extends BasePlayHelper {
             ResponseListener listener = new ResponseListener() {
                 @Override
                 public void onSuccess(String result) {
-                    Log.i(TAG+"11", "好望p2p:" + result);
+                    Log.i(TAG + "11", "好望p2p:" + result);
                     if (result != null) {
                         mChannel.setMts(result);
                         mChannel.setJvmpUrl(result);
@@ -271,7 +271,7 @@ public class C2PlayHelper extends BasePlayHelper {
 
                 @Override
                 public void onFailed(Throwable throwable) {
-                    Log.i(TAG+"11", "好望p2p:onFailed");
+                    Log.i(TAG + "11", "好望p2p:onFailed");
                 }
             };
             HashMap<String, Object> params = new HashMap<>();
@@ -280,14 +280,14 @@ public class C2PlayHelper extends BasePlayHelper {
             try {
                 channel.put("device_id", mChannel.getParent().getSn());
                 channel.put("channel_id", mChannel.getChannel_id());
-                channel.put("stream_type", mChannel.getStreamTag()==JVOctConst.STREAM_SD?"SECONDARY_STREAM_1":"PRIMARY_STREAM");
+                channel.put("stream_type", mChannel.getStreamTag() == JVOctConst.STREAM_SD ? "SECONDARY_STREAM_1" : "PRIMARY_STREAM");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             channels.put(channel);
 
-            Log.i(TAG+"11", "channels:" + channels.toString());
-            Log.i(TAG+"11", "channel:" + channel.toString());
+            Log.i(TAG + "11", "channels:" + channels.toString());
+            Log.i(TAG + "11", "channel:" + channel.toString());
 
             params.put("channels", channels);
             String url = Consts.HOLO_PLAYURL.replace("{user_id}", Consts.userId);
@@ -300,7 +300,7 @@ public class C2PlayHelper extends BasePlayHelper {
                     Log.i(TAG, "GBp2p:" + result);
                     if (result != null) {
                         LiveUrlBean liveUrl = new Gson().fromJson(result, LiveUrlBean.class);
-                        if(liveUrl.getFailNum()== 0) {
+                        if (liveUrl.getFailNum() == 0) {
                             try {
                                 JSONObject object = new JSONObject(result);
                                 JSONArray array = object.optJSONArray("channels");
@@ -316,7 +316,7 @@ public class C2PlayHelper extends BasePlayHelper {
                             }
                             mChannel.setMts(result);
                             startConnect();
-                        }else{
+                        } else {
                             mStateChangeListener.onUpdate(connectFailed, mConnectStateArray[1]);
                             ToastUtils.show(mActivity, liveUrl.getChannels().get(0).getResult().getMsg());
                         }
@@ -336,7 +336,7 @@ public class C2PlayHelper extends BasePlayHelper {
             try {
                 channel.put("device_id", mChannel.getParent().getSn());
                 channel.put("channel_id", mChannel.getChannel_id());
-                channel.put("stream_type", mChannel.getStreamTag()==JVOctConst.STREAM_SD?"SECONDARY_STREAM_1":"PRIMARY_STREAM");
+                channel.put("stream_type", mChannel.getStreamTag() == JVOctConst.STREAM_SD ? "SECONDARY_STREAM_1" : "PRIMARY_STREAM");
                 channel.put("live_protocol", "HOLO");
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -529,8 +529,13 @@ public class C2PlayHelper extends BasePlayHelper {
     }
 
     @Override
+    /**
+     * 断开连接
+     */
     public void disconnect() {
-        if (null != mChannel) mChannel.setMts(null);
+        if (null != mChannel) {
+            mChannel.setMts(null);
+        }
         if (mPlayState == STOPPED) {
             return;
         }
@@ -603,14 +608,19 @@ public class C2PlayHelper extends BasePlayHelper {
     }
 
     @Override
-    public void switchStream(){
+    /**
+     * 切换码流
+     */
+    public void switchStream() {
         disconnect();
         connect(false);
     }
 
+    /**
+     * 重置状态
+     */
     public void reset() {
         mPlayState = IDLE;
-        // 重置状态
         setSendKeyFrame(false);
     }
 

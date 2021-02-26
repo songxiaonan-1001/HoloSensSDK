@@ -1,4 +1,4 @@
-package com.huawei.holosens.live.play.bean;
+    package com.huawei.holosens.live.play.bean;
 
 /**
  * 玻璃类型

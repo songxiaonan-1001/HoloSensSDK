@@ -19,6 +19,7 @@ import org.json.JSONObject;
 /**
  * 云视通协议2.0_摄像机
  *
+ * @author CSV
  */
 
 public class C2GlassIpc extends BaseGlassC2 {
@@ -103,7 +104,9 @@ public class C2GlassIpc extends BaseGlassC2 {
                         case JVEncodedConst.CCONNECTTYPE_DISOK: {
                             Log.e(TAG, "2:断开连接成功");
                             if(!mGlass.isManualDisconnect())        //不是手动断开
+                            {
                                 update(IPlayHelper.connectFailed, mConnectStateArray[1]);
+                            }
                             break;
                         }
                         //25.用户身份验证失败
@@ -163,11 +166,11 @@ public class C2GlassIpc extends BaseGlassC2 {
                     JniUtil.show(glassNo, mGlassSurfaceView.getHolder());
                     Log.v(TAG, "898098778899-I-CALL_NEW_PICTURE=0xA9;what=" + what + ";arg1=" + glassNo + ";arg2=" + result);
                     Log.e(TAG, "I帧");
-                    if (mWindow.getGlassCount() > 4 && !mPlayerHelper.isSendKeyFrame()) {
+                    /*if (mWindow.getGlassCount() > 4 && !mPlayerHelper.isSendKeyFrame()) {
                         mPlayerHelper.sendKeyFrameOnly();
                     } else if (mWindow.getGlassCount() <= 4 && mPlayerHelper.isSendKeyFrame()) {
                         mPlayerHelper.sendFullFrame();
-                    }
+                    }*/
 
                     mPlayerHelper.setConnectState(IPlayHelper.connected);
                     update(IPlayHelper.connected, 0);

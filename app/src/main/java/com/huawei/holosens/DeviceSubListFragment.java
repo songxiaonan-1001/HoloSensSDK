@@ -124,6 +124,7 @@ public class DeviceSubListFragment extends Fragment implements DeviceListEditAda
     public void update(){
         if(!updated){
             List<PlayBean> playList = ((JVMultiPlayActivity)mActivity).getPlayList();
+            //遍历通道列表,设置 设备id和通道id
             for(PlayBean bean :playList){
                 ChannelResponseBean.ChannelsBean channel = new ChannelResponseBean.ChannelsBean();
                 channel.setDevice_id(bean.getDeviceId());

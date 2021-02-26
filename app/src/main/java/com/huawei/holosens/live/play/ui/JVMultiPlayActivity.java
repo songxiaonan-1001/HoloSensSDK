@@ -102,6 +102,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
 import pub.devrel.easypermissions.EasyPermissions;
 import rx.functions.Action1;
 
@@ -115,7 +116,6 @@ import rx.functions.Action1;
  * 3.根据播放界面当前存在的设备数量来判断是否可以滑动。
  * a.如果账号下有效设备数为3(符合<=4的规则), 那播放界面当前存的设备数量就是3;
  * b.如果账号下有效设备数为5(符合>4的规则), 那播放界面当前存的设备数量就是1;
- *
  */
 public class JVMultiPlayActivity extends BaseActivity implements View.OnClickListener {
 
@@ -193,8 +193,9 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         Long lastDisTime = MySharedPreference.getLong(MySharedPreferenceKey.PlayKey.PLAY_LAST_DIS_TIME, 0);
         long timeSpan = System.currentTimeMillis() - lastDisTime;
-        if (timeSpan > 0 && timeSpan < 800)
+        if (timeSpan > 0 && timeSpan < 800) {
             finish();
+        }
 
         //点击防抖
         try {
@@ -424,7 +425,7 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
     private int lastClickId;
 
 
-    public void hideFragment(){
+    public void hideFragment() {
         if (mDeviceList2Fragment.isVisible()) {
             mFragmentManager.beginTransaction().hide(mDeviceList2Fragment).commitAllowingStateLoss();
             return;
@@ -487,9 +488,13 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.layout_glass_add_main:
             case R.id.iv_add://添加设备
-                if (mIsEdit) break;
+                if (mIsEdit) {
+                    break;
+                }
                 if (v.getId() == R.id.layout_glass_add_main) {
-                    if (mSpanCount == 1) break;
+                    if (mSpanCount == 1) {
+                        break;
+                    }
                 }
                 if (mLayoutMultiScreen.getVisibility() == View.VISIBLE) {
                     mLayoutMultiScreen.setVisibility(View.GONE);
@@ -584,7 +589,6 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
             case R.id.delete:
                 deleteDevice();
                 break;
-
 
 
             //分屏选择布局点击事件
@@ -1076,8 +1080,11 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
             mLayoutMultiScreen.setVisibility(View.GONE);
         } else {
             mLayoutMultiScreen.setVisibility(View.VISIBLE);
+            //根据分屏数量获取gridview列表的选中下标
             int selected = getIndexBySpanCount();
+            //设置对应下标的选中状态
             mSelectAdapter.setSelected(selected);
+            //刷新数据
             mSelectAdapter.notifyDataSetChanged();
 
             // 隐藏码流窗口
@@ -1085,27 +1092,42 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
+    /**
+     * 页面选择设置
+     */
     private void doPageSelectSetting() {
         mSelectListView.setAdapter(mSelectAdapter);
         mSelectAdapter.setSelected(0);
         mSelectListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View view, int index, long arg3) {
+                //获取分屏数量：1/4/9/16
                 int spanCount = getSpanCountByIndex(index);
                 if (mShowSpanCount == spanCount && mSpanCount == spanCount && mLastSpanCount == spanCount) {
+                    //如果 分屏数量 = 展示用的分屏数量 = 当前用的分屏数量 = 上次用的分屏数量;退出
                     return;
                 }
+                //更新当前分屏数量
                 mSpanCount = spanCount;
+                //更新当前分屏数量
                 mLastSpanCount = spanCount;
+                //更新展示用的分屏数量
                 mShowSpanCount = spanCount;
-
+                //切换窗口
                 changeWindow(false);
+                //隐藏分屏列表
                 mLayoutMultiScreen.setVisibility(View.GONE);
 
             }
         });
     }
 
+    /**
+     * 通过下标获取分屏数量
+     *
+     * @param index 下标
+     * @return
+     */
     private int getSpanCountByIndex(int index) {
         int spanCount = 1;
         switch (index) {
@@ -1125,6 +1147,11 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
         return spanCount;
     }
 
+    /**
+     * 根据分屏数量获取下标
+     *
+     * @return
+     */
     private int getIndexBySpanCount() {
         int index = 1;
         switch (mShowSpanCount) {
@@ -1160,6 +1187,7 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
     // deviceid和channelid确定一个用来连接的通道
     private List<PlayBean> mPlayList = new ArrayList<>();
 
+    //获取通道列表
     public List<PlayBean> getPlayList() {
         return mPlayList;
     }
@@ -1174,30 +1202,48 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
         /*
           1.计算初始用到的玻璃
          */
+            //有效玻璃数量
             int allValidGlassCount = mPlayList.size();
             for (int i = 0; i < allValidGlassCount; i++) {
+                //创建玻璃类
                 Glass glass = new Glass(GlassType.TYPE_GLASS_CLOUDSEE_V2_IPC);
+                //创建通道类
                 Channel channel = new Channel();
+                //设置通道id
                 channel.setChannel(mPlayList.get(i).getChannelId());
+                //设置通道名称
                 channel.setChannel_id(mPlayList.get(i).getChannelID());
+                //设置通道(设备)类型
                 channel.setDevType(mPlayList.get(i).getType());
+                //设置通道连接协议(holo/GB28181)
                 channel.setChannelType(mPlayList.get(i).getConnect_type());
+                //设置是否支持通道对讲
                 channel.setSupportCall(null != mPlayList.get(i).getDevice_ability() && mPlayList.get(i).getDevice_ability().contains("talk"));
+                //设置是否支持nvr对讲
                 channel.setSupportNvrCall(channel.getDevType() == DevType.NVR);
+                //设置是否支持云台操作
                 channel.setSupportPtz(null != mPlayList.get(i).getDevice_ability() && mPlayList.get(i).getDevice_ability().contains("ptz"));
+                //设置是否是被分享的通道
                 channel.setShared(mPlayList.get(i).isShared());
+                //设置通道昵称
                 channel.setNickName(mPlayList.get(i).getNickName());
+                //设置国标IPC设备对应的通道ID
                 channel.setIpc_device_channel_id(mPlayList.get(i).getIpc_device_channel_id());
+                //设置设备在线状态
                 channel.setOnlineStatus(mPlayList.get(i).getOnlineStatus());
+                //创建设备集合类
                 Device device = new Device();
+                //设置设备连接协议
                 device.setConnect_type(mPlayList.get(i).getConnect_type());
+                //设置设备ID(产品序列号)
                 device.setSn(mPlayList.get(i).getDeviceId());
+                //给通道设置所属设备
                 channel.setParent(device);
+                //玻璃设置对应的通道
                 glass.setChannel(channel);
-
+                //添加玻璃对象到玻璃列表中
                 mAddGlassList.add(glass);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1206,58 +1252,87 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
 
     /**
      * 初始化窗户
+     *
+     * @param delete
      */
     private void initWindow(boolean delete) {
         if (mWindowList != null) {
+            //清空窗户列表
             mWindowList.clear();
         }
 
         /*
           计算需要补全的+号玻璃个数
           如果一扇窗户需要四块玻璃，现在只有三块玻璃，那剩下的一块用+号玻璃填充。
-          如果一扇窗户需要四块玻璃，现在刚好有四块，那么增加一扇窗户，用四块+号玻璃填充。
+          如果一扇窗户需要四块玻璃，现在刚好有四块，那么增加一扇窗户(第二页)，用四块+号玻璃填充。
         */
+        //当前添加的通道数量
         int currentGlassCount = mAddGlassList.size();
+        //加号数量
         int addCount;
         if (currentGlassCount == 0) {
+            //如果当前添加的通道数量为0;
+            //加号数量 = 当前真实分屏数量
             addCount = mSpanCount;
         } else {
             if (currentGlassCount % mSpanCount == 0) {
+                //如果当前添加的通道数量 取余运算 当前分屏数量(1/4/9/16),值为0
+                //那么: 加号数量 = 当前真实分屏数量(即第二页全是加号,数量为分屏数量)
+                //例:通道数:4; 分屏数:4; 加号数:4;
                 addCount = mSpanCount;
             } else {
+                //如果当前添加的通道数量 取余运算 当前分屏数量(1/4/9/16),值不为0
+                //那么: 加号数量 = 当前真实分屏数量 - 余数(即不够一屏的通道数量)
+                //例: 通道数:5; 分屏数:4; 加号数:4-(5%4)=3;
                 addCount = mSpanCount - currentGlassCount % mSpanCount;
             }
         }
+        //玻璃列表
         List<Glass> glassList = null;
+        //遍历每一块玻璃(包括加号玻璃),
         for (int i = 0; i < currentGlassCount + addCount; i++) {
             if (i % mSpanCount == 0) {
+                //如果当前玻璃为窗户中的最后一块
+                //那么添加玻璃列表到窗户列表中
                 glassList = new ArrayList<>();
                 mWindowList.add(glassList);
             }
             if (i < currentGlassCount) {
-                // 窗户号
+                //如果当前玻璃上存在通道
+                // 获取窗户号(从0开始)
                 int windowNo = mWindowList.size() - 1;
+                //获取下标对应的玻璃对象
                 Glass glass = mAddGlassList.get(i);
-//                Log.e("1234567890", "initWindow: " + glass.getNo() );
                 if (delete) {
                     if (glass.getNo() == GlassType.TYPE_EMPTY) {
+                        //设置玻璃号
                         glass.setNo(i);
                     }
                 } else {
+                    //设置玻璃号
                     glass.setNo(i);
                 }
+                //设置窗口号
                 glass.setWindowNo(windowNo);
+                //添加玻璃
                 glassList.add(glass);
 
-                // 检查当前的玻璃是否是用户选中的窗户上的那块玻璃
+
+                //获取玻璃对应的通道
                 Channel channel = glass.getChannel();
+                //获取通道对应的设备
                 Device device = channel.getParent();
+                // 检查当前的玻璃是否是用户选中的窗户上的那块玻璃
+                // 获取设备序列号和设备号比较 同时 获取设备通道号和通道比较
                 boolean isSelectedGlass = device.getSn().equals(mDeviceNo) && (mChannelNo == channel.getChannel());
                 if (isSelectedGlass) {
+                    //如果是选中的玻璃,获取选中玻璃号
                     mSelectedGlassNo = glass.getNo();
+                    //设置画面所在窗户
                     mOnWindowNo = windowNo;
                 }
             } else {
+                //如果当前玻璃上不存在通道(即 加号玻璃 "+")
                 Glass empty = new Glass(GlassType.TYPE_PLUS);
                 empty.setNo(GlassType.TYPE_PLUS);
                 glassList.add(empty);
@@ -1290,9 +1365,9 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
             stopDoubleCall(false);
             mChannel.setVoiceCall(false);//不等回调，直接置为false
         }
-
+        //初始化窗户
         initWindow(delete);
-
+        //改变窗户上的玻璃数量后进行的更新各种信息
         updateInfos();
 
     }
@@ -1351,6 +1426,7 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
 
     }
 
+    //删除设备
     private void deleteDevice() {
         final TipDialog dialog = new TipDialog(this);
         dialog.setTitle(getString(R.string.delete_channel_tip))
@@ -1816,7 +1892,9 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
             //收到O帧
             case JVEncodedConst.WHAT_NORMAL_DATA:
                 refreshData();
-                if (null == mChannel) return;
+                if (null == mChannel) {
+                    return;
+                }
                 String[] streamArray = getResources().getStringArray(R.array.array_stream);
                 String currentStream = mChannel.getStreamTag() == JVOctConst.STREAM_HD ? streamArray[1] : streamArray[0];
 
@@ -1844,12 +1922,15 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
                 if (mSpanCount == 1 && !TextUtils.isEmpty(mAutoFunc)) {
                     switch (mAutoFunc) {
                         case AUTO_FUNC_AUDIO:
+                            //打开关闭音频监听
                             switchAudio();
                             break;
                         case AUTO_FUNC_STREAM:
+                            //切换码流
                             switchStream();
                             break;
                         case AUTO_FUNC_SNAP:
+
                             mTopBarView.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
@@ -1874,10 +1955,11 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
                             break;
                         case AUTO_FUNC_PTZ:
                             refreshData();
-                            if (!mChannel.isPtzLayoutShow())
+                            if (!mChannel.isPtzLayoutShow()) {
                                 getPTZControlToken();
-                            else
+                            } else {
                                 releasePTZControlToken();
+                            }
                             break;
                         case AUTO_FUNC_PLAYBACK_LOCAL:
                             skipToPlayBackPage(false);
@@ -2124,6 +2206,9 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
     private Channel mChannel;
     private Device mDevice;
 
+    /**
+     * 更新数据
+     */
     private void refreshData() {
         mGlass = getGlassByNo(mSelectedGlassNo);
         if (null != mGlass) {
@@ -2643,7 +2728,6 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
 //        event.setAttachment(item.toString());
 //        EventBus.getDefault().post(event);
     }
-
 
 
     /**

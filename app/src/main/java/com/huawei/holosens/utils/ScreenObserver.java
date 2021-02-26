@@ -10,6 +10,9 @@ import android.util.Log;
 
 import java.lang.reflect.Method;
 
+/**
+ * 屏幕解锁监听类
+ */
 public class ScreenObserver {
     private static String TAG = "ScreenObserver";
     private static Method mReflectScreenState;
@@ -91,14 +94,15 @@ public class ScreenObserver {
     }
 
     public interface ScreenStateListener {
+        //屏幕解锁
         void onScreenOn();
 
+        //屏幕锁屏
         void onScreenOff();
     }
 
     /**
      * screen状态广播接收者
-     *
      */
     private class ScreenBroadcastReceiver extends BroadcastReceiver {
         private String action = null;

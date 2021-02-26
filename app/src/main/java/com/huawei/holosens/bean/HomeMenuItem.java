@@ -46,7 +46,9 @@ public class HomeMenuItem {
         this.resId = resId;
     }
 
-    public int getBackgroundId() {
+    public int getBackgroundId(
+
+    ) {
         return backgroundId;
     }
 
