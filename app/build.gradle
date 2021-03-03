@@ -30,14 +30,13 @@ android {
                 variant.outputs.all {
                     def fileName = "Holosens-${defaultConfig.versionName}-${defaultConfig.versionCode}-${releaseTime()}.apk"
                     outputFileName = fileName
-
                 }
             }
         }
     }
 
     //华为推送相关
-    /*signingConfigs {
+    signingConfigs {
         release {
             keyAlias 'holosens'
             keyPassword '123456'
@@ -53,16 +52,16 @@ android {
     }
     buildTypes {
         debug {
-            signingConfig signingConfigs.config
+            signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {
-            signingConfig signingConfigs.config
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }*/
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -70,9 +69,11 @@ android {
     }
 }
 
+//正式版apk生成时间(生成release版apk时会用到)
 def releaseTime() {
     return new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("GMT+8"))
 }
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.0.2'
@@ -106,8 +107,10 @@ dependencies {
     implementation 'org.aspectj:aspectjrt:1.8.9'
 
     //腾讯bugly ，崩溃上报
-    implementation 'com.tencent.bugly:crashreport:latest.release' //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
-    implementation 'com.tencent.bugly:nativecrashreport:latest.release' //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
+    implementation 'com.tencent.bugly:crashreport:latest.release'
+    //其中latest.release指代最新Bugly SDK版本号，也可以指定明确的版本号，例如2.1.9
+    implementation 'com.tencent.bugly:nativecrashreport:latest.release'
+    //其中latest.release指代最新Bugly NDK版本号，也可以指定明确的版本号，例如3.0
 
     implementation 'com.belerweb:pinyin4j:2.5.0'
 
