@@ -139,8 +139,7 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
 
     private String mAutoFunc;
 
-
-    protected TopBarLayout mTopBarView;
+    protected TopBarLayout mTopBarView;//顶部标题栏
     private FragmentManager mFragmentManager;
     private PlayFragment mPlayFragment;
     private NavPortraitFragment mNavPortraitFragment;
@@ -216,16 +215,22 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
                 | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
         setContentView(R.layout.activity_multi_play);
         mEnterpriseId = MySharedPreference.getString(MySharedPreferenceKey.LoginKey.CURRENT_ENTERPRISE);
+
+        //初始化设置(获取通道数据;设置多屏选择)
         initSettings();
+        //初始化列表
         initUi();
     }
 
     private void initSettings() {
+        //--------参数处理 start--------
         Intent intent = getIntent();
-        // 参数处理 start
+        //获取传递过来的 包含设备信息的序列化数据
         String data = intent.getStringExtra(BundleKey.PLAY_BEAN_LIST);
+        //对json数据判空处理
         if (!TextUtils.isEmpty(data)) {
             try {
+                //new TypeToken<ArrayList<PlayBean>>(){}.getType() 即 Gson通过借助TypeToken获取泛型参数的类型的方法
                 mPlayList = new Gson().fromJson(data, new TypeToken<ArrayList<PlayBean>>() {
                 }.getType());
             } catch (JsonSyntaxException e) {
@@ -233,62 +238,145 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
                 mPlayList = new ArrayList<>();
             }
         }
+        //集合数据不为null
         if (mPlayList.size() > 0) {
+            //获取真实分屏数量,默认为1(当前获取为1)
             mSpanCount = intent.getIntExtra(BundleKey.SPAN_COUNT, 1);
             mShowSpanCount = mSpanCount;
             if (mSpanCount > 1) {
                 mLastSpanCount = mSpanCount;
             }
 
+            //获取传递过来的 列表点击条目的下标
             mSelectedGlassNo = intent.getIntExtra(BundleKey.SELECT_NO, -1);
+            //如果获取到有效下标(不为-1) 并且 下标小于集合长度(即点击的是有效通道)
             if (mSelectedGlassNo != -1 && mSelectedGlassNo < mPlayList.size()) {
+                //根据下标获取设备信息
+
+                //获取设备ID
                 mDeviceNo = mPlayList.get(mSelectedGlassNo).getDeviceId();
+                //获取通道ID
                 mChannelNo = mPlayList.get(mSelectedGlassNo).getChannelId();
+                //获取设备类型(IPC/NVR)
                 mDeviceType = mPlayList.get(mSelectedGlassNo).getType();
+                //获取通道名称
                 mDeviceName = mPlayList.get(mSelectedGlassNo).getNickName();
-                mDeviceName = TextUtils.isEmpty(mDeviceName) ? mDeviceNo : mDeviceName;
             } else {
-                //取最后一个通道显示
+                //??? 理论上走不到这一步
+                //取最后一个并且有效的通道显示
                 mDeviceNo = mPlayList.get(mPlayList.size() - 1).getDeviceId();
                 mChannelNo = mPlayList.get(mPlayList.size() - 1).getChannelId();
                 mDeviceType = mPlayList.get(mPlayList.size() - 1).getType();
                 mDeviceName = mPlayList.get(mPlayList.size() - 1).getNickName();
-                mDeviceName = TextUtils.isEmpty(mDeviceName) ? mDeviceNo : mDeviceName;
             }
+            mDeviceName = TextUtils.isEmpty(mDeviceName) ? mDeviceNo : mDeviceName;
         }
-        // 参数处理 end
+        //--------参数处理 end--------
 
+        //创建多屏选择的适配器
         mSelectAdapter = new MultiScreenAdapter(this);
+        //创建selector数组
         int[] spanIds = new int[]{R.drawable.selector_multi_screen_select_1,
                 R.drawable.selector_multi_screen_select_4,
                 R.drawable.selector_multi_screen_select_9,
                 R.drawable.selector_multi_screen_select_16};
+        //设置适配器数据
         mSelectAdapter.setData(spanIds);
 
         initDatas();
-
     }
 
-    private void initUi() {
+    /**
+     * 初始化数据
+     * <= 4 个设备, 分屏时设备全展示;
+     * > 4 个设备, 分屏时显示当前设备和+号.
+     */
+    private void initDatas() {
+        try {
+        /*
+          1.计算初始用到的玻璃
+         */
+            //有效玻璃数量
+            int allValidGlassCount = mPlayList.size();
+            for (int i = 0; i < allValidGlassCount; i++) {
+                //创建玻璃类
+                Glass glass = new Glass(GlassType.TYPE_GLASS_CLOUDSEE_V2_IPC);
+                //创建通道类
+                Channel channel = new Channel();
+                //设置通道id
+                channel.setChannel(mPlayList.get(i).getChannelId());
+                //设置通道名称
+                channel.setChannel_id(mPlayList.get(i).getChannelID());
+                //设置通道(设备)类型
+                channel.setDevType(mPlayList.get(i).getType());
+                //设置通道连接协议(holo/GB28181)
+                channel.setChannelType(mPlayList.get(i).getConnect_type());
+                //设置是否支持通道对讲
+                channel.setSupportCall(null != mPlayList.get(i).getDevice_ability() && mPlayList.get(i).getDevice_ability().contains("talk"));
+                //设置是否支持nvr对讲
+                channel.setSupportNvrCall(channel.getDevType() == DevType.NVR);
+                //设置是否支持云台操作
+                channel.setSupportPtz(null != mPlayList.get(i).getDevice_ability() && mPlayList.get(i).getDevice_ability().contains("ptz"));
+                //设置是否是被分享的通道
+                channel.setShared(mPlayList.get(i).isShared());
+                //设置通道昵称
+                channel.setNickName(mPlayList.get(i).getNickName());
+                //设置国标IPC设备对应的通道ID
+                channel.setIpc_device_channel_id(mPlayList.get(i).getIpc_device_channel_id());
+                //设置设备在线状态
+                channel.setOnlineStatus(mPlayList.get(i).getOnlineStatus());
+                //创建设备集合类
+                Device device = new Device();
+                //设置设备连接协议
+                device.setConnect_type(mPlayList.get(i).getConnect_type());
+                //设置设备ID(产品序列号)
+                device.setSn(mPlayList.get(i).getDeviceId());
+                //给通道设置所属设备
+                channel.setParent(device);
+                //玻璃设置对应的通道
+                glass.setChannel(channel);
+                //添加玻璃对象到玻璃列表中
+                mAddGlassList.add(glass);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        initWindow(false);
+    }
 
+
+    private void initUi() {
+        //顶部标题栏
         mTopBarView = findViewById(R.id.topbar);
+        //设置顶部标题栏
         mTopBarView.setTopBar(R.drawable.selector_back_icon, -1, R.string.live_title, this);
-//        mTopBarView.setRightTextRes(R.string.edit);
+        //设置右侧文字(编辑)
+        mTopBarView.setRightTextRes(R.string.edit);
+        //设置标题栏背景色
         mTopBarView.setTopBarBackgroundResource(R.color.white);
 
+        //当前页面(如:1/2)
         mTvPage = findViewById(R.id.tv_page);
+
+        //分享按钮(功能未实现)
         mBtnShare = findViewById(R.id.btn_portrait_share);
-        mBtnSettings = findViewById(R.id.btn_portrait_settings);
         mBtnShare.setOnClickListener(this);
+        //设置按钮(功能未实现)
+        mBtnSettings = findViewById(R.id.btn_portrait_settings);
         mBtnSettings.setOnClickListener(this);
+
+        //刷新数据
         refreshData();
+
         if (mSpanCount == 1 && null != mChannel && !mChannel.isShared()) {
-//            mBtnShare.setVisibility(View.VISIBLE);
+            //当前分屏数为1;通道不为null;通道未分享
+            mBtnShare.setVisibility(View.VISIBLE);
         }
         if (null == mChannel || mSpanCount != 1) {
+            //通道为null 或者 当前分屏数量不为1
             mBtnSettings.setVisibility(View.GONE);
         } else {
-//            mBtnSettings.setVisibility(View.VISIBLE);
+            mBtnSettings.setVisibility(View.VISIBLE);
         }
 
         mFragmentManager = getSupportFragmentManager();
@@ -433,6 +521,9 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
     }
 
     @Override
+    /**
+     * 点击事件
+     */
     public void onClick(View v) {
         //防止重复点击
         if (v.getId() == lastClickId) {
@@ -445,9 +536,7 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
         lastClickTime = System.currentTimeMillis();
 
         switch (v.getId()) {
-
-            //新手引导页
-            case R.id.iv_guide:
+            case R.id.iv_guide://新手引导页
                 mGuideNum++;
                 if (mGuideNum == 2) {
                     mFragmentManager.beginTransaction().show(mDeviceList2Fragment).commitAllowingStateLoss();
@@ -464,11 +553,10 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
                     MySharedPreference.putBoolean(MySharedPreferenceKey.GuideKey.GUIDE_PLAY, true);
                 }
                 break;
-
-            //返回
-            case R.id.left_btn:
+            case R.id.left_btn://返回
             case R.id.btn_back:
                 if (mIsEdit) {
+                    //判断是否为编辑状态
                     mIsEdit = false;
                     mTopBarView.setLeftButtonRes(R.drawable.selector_back_icon);
                     mTopBarView.setRightTextRes(R.string.edit);
@@ -477,10 +565,14 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
                     if (null != mPlayFragment) {
                         mPlayFragment.setEdit(mIsEdit);
                     }
+
                     if (null != mNavPortraitFragment) {
                         mNavPortraitFragment.setEdit(mIsEdit);
                     }
+
+                    //取消禁用分享按钮
                     mBtnShare.setEnabled(!mIsEdit);
+                    //取消禁用设置按钮
                     mBtnSettings.setEnabled(!mIsEdit);
                     break;
                 }
@@ -959,7 +1051,6 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
         } else {
             mTvPage.setVisibility(View.GONE);
         }
-//        }
     }
 
     /**
@@ -1192,63 +1283,6 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
         return mPlayList;
     }
 
-    /**
-     * 初始化数据
-     * <= 4 个设备, 分屏时设备全展示;
-     * > 4 个设备, 分屏时显示当前设备和+号.
-     */
-    private void initDatas() {
-        try {
-        /*
-          1.计算初始用到的玻璃
-         */
-            //有效玻璃数量
-            int allValidGlassCount = mPlayList.size();
-            for (int i = 0; i < allValidGlassCount; i++) {
-                //创建玻璃类
-                Glass glass = new Glass(GlassType.TYPE_GLASS_CLOUDSEE_V2_IPC);
-                //创建通道类
-                Channel channel = new Channel();
-                //设置通道id
-                channel.setChannel(mPlayList.get(i).getChannelId());
-                //设置通道名称
-                channel.setChannel_id(mPlayList.get(i).getChannelID());
-                //设置通道(设备)类型
-                channel.setDevType(mPlayList.get(i).getType());
-                //设置通道连接协议(holo/GB28181)
-                channel.setChannelType(mPlayList.get(i).getConnect_type());
-                //设置是否支持通道对讲
-                channel.setSupportCall(null != mPlayList.get(i).getDevice_ability() && mPlayList.get(i).getDevice_ability().contains("talk"));
-                //设置是否支持nvr对讲
-                channel.setSupportNvrCall(channel.getDevType() == DevType.NVR);
-                //设置是否支持云台操作
-                channel.setSupportPtz(null != mPlayList.get(i).getDevice_ability() && mPlayList.get(i).getDevice_ability().contains("ptz"));
-                //设置是否是被分享的通道
-                channel.setShared(mPlayList.get(i).isShared());
-                //设置通道昵称
-                channel.setNickName(mPlayList.get(i).getNickName());
-                //设置国标IPC设备对应的通道ID
-                channel.setIpc_device_channel_id(mPlayList.get(i).getIpc_device_channel_id());
-                //设置设备在线状态
-                channel.setOnlineStatus(mPlayList.get(i).getOnlineStatus());
-                //创建设备集合类
-                Device device = new Device();
-                //设置设备连接协议
-                device.setConnect_type(mPlayList.get(i).getConnect_type());
-                //设置设备ID(产品序列号)
-                device.setSn(mPlayList.get(i).getDeviceId());
-                //给通道设置所属设备
-                channel.setParent(device);
-                //玻璃设置对应的通道
-                glass.setChannel(channel);
-                //添加玻璃对象到玻璃列表中
-                mAddGlassList.add(glass);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        initWindow(false);
-    }
 
     /**
      * 初始化窗户
@@ -1550,11 +1584,13 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
     private SimpleTask mTimeoutTask, mDisconnectTask;
     private boolean isBackPressed;
 
+    //是否退出播放页面
     public boolean isBackPressed() {
         return isBackPressed;
     }
 
     /**
+     * 退出播放页面
      * @param exitDirectly true:直接退出  false:需要先切换竖屏
      */
     private void exitMultiPlay(boolean exitDirectly) {
@@ -1695,8 +1731,6 @@ public class JVMultiPlayActivity extends BaseActivity implements View.OnClickLis
         switch (event.getMsgTag()) {
             case MsgEvent.MSG_EVENT_CHANGE_WINDOW_DOUBLECLICK:// 双击改变窗户上的玻璃数量
                 Log.e("changewindow-doubleClic", "k-1,mLastSpanCount=" + mLastSpanCount + ";mSpanCount=" + mSpanCount);
-
-
                 /*
                   单屏双击, 弹出分屏选择Dialog
                   多屏上单击某块玻璃, 直接切到对应的单屏

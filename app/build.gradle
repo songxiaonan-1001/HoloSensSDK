@@ -43,12 +43,12 @@ android {
             storeFile file('HolosensKey')
             storePassword '123456'
         }
-        debug {
+       /* debug {
             storeFile file('HolosensKey')
             storePassword '123456'
             keyAlias 'holosens'
             keyPassword '123456'
-        }
+        }*/
     }
     buildTypes {
         debug {

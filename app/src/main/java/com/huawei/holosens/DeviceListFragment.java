@@ -71,6 +71,7 @@ public class DeviceListFragment extends BaseFragment {
                 DeviceResponseBean.DevicesBean bean = (DeviceResponseBean.DevicesBean) adapter.getItem(position);
                 String deviceId = bean.getDevice_id();
                 String deviceType = bean.getDevice_type();
+                //页面跳转
                 Intent intent = new Intent(getActivity(), ChannelListActivity.class);
                 intent.putExtra("deviceId", deviceId);
                 intent.putExtra("deviceType", deviceType);

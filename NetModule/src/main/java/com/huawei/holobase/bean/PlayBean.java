@@ -8,7 +8,7 @@ import java.util.List;
  * @ProjectName: HoloSens
  * @Package: com.huawei.base.bean
  * @ClassName: PlayBean
- * @Description: java类作用描述
+ * @Description: 设备信息类
  * @CreateDate: 2020-01-11 11:51
  * @Version: 1.0
  */
